@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Donation;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,11 @@ class ShipmentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'donation_id' => Donation::all()->random()->id,
+            'receiver_id' => User::all()->random()->id, // TODO: Change User with Indigent
+            'dispatcher_id' => User::all()->random()->id, // TODO: Change User with Volunteer
+            'dispatcher_location' => fake()->address(),
+            'estimated_delivery_time' => fake()->numberBetween(20,100)
         ];
     }
 }

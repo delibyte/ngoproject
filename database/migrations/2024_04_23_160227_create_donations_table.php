@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreign('donor_id')->references('id')->on('users');
             $table->enum('type', ['cash', 'food', 'furniture', 'clothing']);
             $table->unsignedBigInteger('amount');
-            $table->enum('approval', ['accepted', 'rejected']);
+            $table->enum('approval', ['pending', 'accepted', 'rejected']);
             $table->enum('delivery_type', ['to-us', 'by-us']);
             $table->boolean('collected');
             $table->timestamps();

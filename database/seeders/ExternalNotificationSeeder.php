@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\ExternalNotification;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -12,6 +13,6 @@ class ExternalNotificationSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        ExternalNotification::factory()->count(10)->create();
     }
 }

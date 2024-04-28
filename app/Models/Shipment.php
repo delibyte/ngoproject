@@ -10,6 +10,8 @@ class Shipment extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function item(): HasOne
     {
         return $this->hasOne(Donation::class);

@@ -10,6 +10,8 @@ class Donation extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function donor(): BelongsTo
     {
         return $this->belongsTo(User::class);

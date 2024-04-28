@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,12 @@ class ExternalNotificationFactory extends Factory
      */
     public function definition(): array
     {
+        $type = ['email', 'sms'];
+
         return [
-            //
+            'type' => array_rand($type, 1),
+            'receiver_id' => User::all()->random()->id,
+            'subject' => fake()->text()
         ];
     }
 }

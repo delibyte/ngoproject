@@ -10,6 +10,8 @@ class Warehouse extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     public function items(): HasMany
     {
         return $this->hasMany(Donation::class);

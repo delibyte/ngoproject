@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,16 @@ class DonationFactory extends Factory
      */
     public function definition(): array
     {
+        $type = ['cash', 'food', 'furniture', 'clothing'];
+        $approval = ['pending', 'accepted', 'rejected'];
+
         return [
-            //
+            'donor_id' => User::all()->random()->id,
+            'type' => array_rand($type, 1),
+            'amount' => fake()->numberBetween(3, 15),
+            'approval' => array_rand($approval, 1),
+            'delivery_type' => 'by_us',
+            'collected' => fake()->boolean()
         ];
     }
 }
