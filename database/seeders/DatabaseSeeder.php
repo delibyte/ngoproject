@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
             WarehouseSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
-            //VolunteerSeeder::class,
+            VolunteerSeeder::class,
+            DonationSeeder::class
         ]);
 
     }

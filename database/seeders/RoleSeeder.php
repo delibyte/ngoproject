@@ -13,12 +13,12 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles=['volunteer', 'donor', 'administrator', 'coordinator', 'indigent'];
-        foreach($roles as $role)
+        $role_names=['volunteer', 'donor', 'administrator', 'coordinator', 'indigent'];
+        foreach($role_names as $role_name)
         {
-            Role::factory()->create([
-                'name' => $role
-            ]);
+            $role = new Role;
+            $role->name = $role_name;
+            $role->save();
         }
 
     }

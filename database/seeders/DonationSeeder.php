@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Donation;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Seeder;
 
 class DonationSeeder extends Seeder
@@ -13,6 +14,14 @@ class DonationSeeder extends Seeder
      */
     public function run(): void
     {
-        Donation::factory()->count(10)->create();
+        $donors = User::whereHas('roles', function (Builder $query) {
+            $query->where('name', 'donor');
+        })->take(5)->get();
+
+        foreach ($donors as $donor) {
+            Donation::factory()->count(5)->create([
+                    'donor_id' => $donor->id
+            ]);
+        }
     }
 }

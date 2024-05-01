@@ -20,7 +20,7 @@ class ExternalNotificationFactory extends Factory
         $type = ['email', 'sms'];
 
         return [
-            'type' => array_rand($type, 1),
+            'type' => $type[array_rand($type, 1)],
             'receiver_id' => User::all()->random()->id,
             'subject' => fake()->text()
         ];

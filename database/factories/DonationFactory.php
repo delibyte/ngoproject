@@ -22,11 +22,11 @@ class DonationFactory extends Factory
 
         return [
             'donor_id' => User::all()->random()->id,
-            'type' => array_rand($type, 1),
+            'type' => $type[array_rand($type, 1)],
             'amount' => fake()->numberBetween(3, 15),
-            'approval' => array_rand($approval, 1),
-            'delivery_type' => 'by_us',
-            'collected' => fake()->boolean()
+            'approval' => $approval[array_rand($approval, 1)],
+            'delivery_type' => 'by-us',
+            'collected' => false
         ];
     }
 }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->unsignedbiginteger('region_id');
             $table->foreign('region_id')->references('id')->on('areas');
             $table->boolean('transportation');
-            // TODO: Availability Information
+            $table->json('availability'); // { week1: { "Monday":"17:30-18:00", "Thursday":"14:30-17:00" }, week2: {...}, ... }
             $table->enum('status', ['pending', 'active', 'revoked']);
             $table->timestamps();
         });
