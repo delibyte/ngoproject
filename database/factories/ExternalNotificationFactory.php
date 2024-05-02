@@ -17,10 +17,8 @@ class ExternalNotificationFactory extends Factory
      */
     public function definition(): array
     {
-        $type = ['email', 'sms'];
-
         return [
-            'type' => $type[array_rand($type, 1)],
+            'type' => fake()->randomElement(['email', 'sms']),
             'receiver_id' => User::all()->random()->id,
             'subject' => fake()->text()
         ];

@@ -17,14 +17,11 @@ class DonationFactory extends Factory
      */
     public function definition(): array
     {
-        $type = ['cash', 'food', 'furniture', 'clothing'];
-        $approval = ['pending', 'accepted', 'rejected'];
-
         return [
             'donor_id' => User::all()->random()->id,
-            'type' => $type[array_rand($type, 1)],
+            'type' => fake()->randomElement(['cash', 'food', 'furniture', 'clothing']),
             'amount' => fake()->numberBetween(3, 15),
-            'approval' => $approval[array_rand($approval, 1)],
+            'approval' => fake()->randomElement(['pending', 'accepted', 'rejected']),
             'delivery_type' => 'by-us',
             'collected' => false
         ];
