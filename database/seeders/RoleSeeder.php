@@ -16,7 +16,7 @@ class RoleSeeder extends Seeder
         $role_names=['volunteer', 'donor', 'administrator', 'coordinator', 'indigent'];
         foreach($role_names as $role_name)
         {
-            $role = new role;
+            $role = new Role;
             $role->name = $role_name;
             $role->save();
         }
