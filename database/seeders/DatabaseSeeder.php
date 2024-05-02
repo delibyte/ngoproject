@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             DonationTypeSeeder::class,
             ProjectSeeder::class,
             DonationSeeder::class,
-            IndigentSeeder::class
+            IndigentSeeder::class,
+            ExternalNotificationSeeder::class
         ]);
 
     }
