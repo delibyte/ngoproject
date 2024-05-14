@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\DonationType;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +20,7 @@ class DonationFactory extends Factory
     {
         return [
             'donor_id' => User::all()->random()->id,
-            'type' => fake()->randomElement(['cash', 'food', 'furniture', 'clothing']),
+            'type_id' => DonationType::all()->random()->id,
             'amount' => fake()->numberBetween(3, 15),
             'approval' => fake()->randomElement(['pending', 'accepted', 'rejected']),
             'delivery_type' => 'by-us',

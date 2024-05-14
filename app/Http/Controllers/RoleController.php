@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RoleController extends Controller
 {
@@ -12,31 +14,10 @@ class RoleController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Role $role)
-    {
-        //
+        $roles = Role::paginate(10);
+        return view('role.index', [
+            'roles' => $roles
+        ]);
     }
 
     /**
@@ -44,7 +25,10 @@ class RoleController extends Controller
      */
     public function edit(Role $role)
     {
-        //
+        return view ('role.edit', [
+            'role' => $role,
+            'users' => $role->users
+        ]);
     }
 
     /**
@@ -53,13 +37,13 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         //
-    }
+        $attributes = $request->validate([
+            'user_id' => 'required', 'integer', 'exists:users,id',
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Role $role)
-    {
-        //
+        $user = User::where('id', $attributes['user_id'])->first();
+        $user->roles()->detach($role->id);
+
+        return redirect()->route('roles.edit', ['role' => $role])->with('success',  'Role ' . $role->name . ' removed from user ' . $user->name);
     }
 }

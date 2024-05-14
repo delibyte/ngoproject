@@ -12,7 +12,10 @@ class AreaController extends Controller
      */
     public function index()
     {
-        //
+        $areas = Area::paginate(10);
+        return view('area.index', [
+            'areas' => $areas
+        ]);
     }
 
     /**
@@ -20,7 +23,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        //
+        return view('area.create');
     }
 
     /**
@@ -28,15 +31,14 @@ class AreaController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $attributes = $request->validate([
+            'name' => 'required', 'max:100',
+            'description' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Area $area)
-    {
-        //
+        Area::create($attributes);
+
+        return redirect()->route('areas.index')->with('success', 'Area Defined!');
     }
 
     /**
@@ -44,7 +46,9 @@ class AreaController extends Controller
      */
     public function edit(Area $area)
     {
-        //
+        return view ('area.edit', [
+            'area' => $area
+        ]);
     }
 
     /**
@@ -52,7 +56,14 @@ class AreaController extends Controller
      */
     public function update(Request $request, Area $area)
     {
-        //
+        $attributes = $request->validate([
+            'name' => 'required', 'max:100',
+            'description' => 'required',
+        ]);
+
+        $area->update($attributes);
+
+        return redirect()->route('areas.index')->with('success', 'Area Updated!');
     }
 
     /**
@@ -60,6 +71,8 @@ class AreaController extends Controller
      */
     public function destroy(Area $area)
     {
-        //
+        $area->delete();
+
+        return redirect()->route('areas.index')->with('success', 'Area Deleted!');
     }
 }

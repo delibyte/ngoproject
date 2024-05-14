@@ -21,4 +21,9 @@ class Donation extends Model
     {
         return $this->belongsTo(Warehouse::class);
     }
+
+    public function type(): BelongsTo
+    {
+        return $this->belongsTo(DonationType::class, 'type_id');
+    }
 }

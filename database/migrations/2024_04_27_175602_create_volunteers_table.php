@@ -16,9 +16,9 @@ return new class extends Migration
             $table->unsignedbiginteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->text('profession');
-            $table->bigInteger('income');
+            $table->unsignedbiginteger('income');
             $table->unsignedbiginteger('region_id');
-            $table->foreign('region_id')->references('id')->on('areas');
+            $table->foreign('region_id')->references('id')->on('areas')->constrained();
             $table->boolean('transportation');
             $table->json('availability'); // { week1: { "Monday":"17:30-18:00", "Thursday":"14:30-17:00" }, week2: {...}, ... }
             $table->enum('status', ['pending', 'active', 'revoked']);

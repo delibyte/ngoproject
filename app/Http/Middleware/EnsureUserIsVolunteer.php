@@ -21,6 +21,6 @@ class EnsureUserIsVolunteer
             return $next($request);
         }
 
-        return redirect('homepage');
+        return redirect()->route('homepage');
     }
 }

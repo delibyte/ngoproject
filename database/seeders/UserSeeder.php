@@ -36,16 +36,25 @@ class UserSeeder extends Seeder
         // Create Administator User
         $user_admin = User::factory()->create([
             'name' => 'Admin Williams',
-            'email' => 'admin@gmail.com',
+            'email' => 'admin@ngo.com',
             'password' => Hash::make('password'),
             'status' => 'active',
         ]);
         $user_admin->roles()->attach($role_admin->id);
 
         // Create Volunteer User
+        $user_donor = User::factory()->create([
+            'name' => 'Donor Williams',
+            'email' => 'donor@ngo.com',
+            'password' => Hash::make('password'),
+            'status' => 'active',
+        ]);
+        $user_donor->roles()->attach($role_donor->id);
+
+        // Create Volunteer User
         $user_volunteer = User::factory()->create([
             'name' => 'Volunteer Williams',
-            'email' => 'volunteer@gmail.com',
+            'email' => 'volunteer@ngo.com',
             'password' => Hash::make('password'),
             'status' => 'active',
         ]);

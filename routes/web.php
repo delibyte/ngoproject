@@ -5,7 +5,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
 
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\DonationController;
+
 use App\Http\Middleware\EnsureUserIsAdmin;
+use App\Http\Middleware\EnsureUserIsDonor;
 
 Route::get('/', function () {
     return view('homepage');
@@ -27,6 +32,6 @@ Route::get('dashboard', function() {
     }
 })->middleware('auth');
 
-Route::get('test', function() {
-    return true;
-})->middleware(['auth', EnsureUserIsAdmin::class]);
+Route::resource('admin/areas', AreaController::class)->middleware(EnsureUserIsAdmin::class);
+Route::resource('admin/roles', RoleController::class)->middleware(EnsureUserIsAdmin::class);
+Route::resource('donations', DonationController::class)->middleware(EnsureUserIsDonor::class);
