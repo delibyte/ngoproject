@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('donor_id');
             $table->foreign('donor_id')->references('id')->on('users');
             $table->unsignedBigInteger('type_id');
-            $table->foreign('type_id')->references('id')->on('donation_types');
+            $table->foreign('type_id')->references('id')->on('donation_types')->onDelete('cascade');
             $table->unsignedBigInteger('amount');
             $table->enum('approval', ['pending', 'accepted', 'rejected'])->default('pending');
             $table->enum('delivery_type', ['to-us', 'by-us']);

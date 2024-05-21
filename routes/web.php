@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\DonationController;
+use App\Http\Controllers\DonationTypeController;
 
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsDonor;
@@ -34,4 +35,5 @@ Route::get('dashboard', function() {
 
 Route::resource('admin/areas', AreaController::class)->middleware(EnsureUserIsAdmin::class);
 Route::resource('admin/roles', RoleController::class)->middleware(EnsureUserIsAdmin::class);
+Route::resource('admin/donations/types', DonationTypeController::class)->middleware(EnsureUserIsAdmin::class);
 Route::resource('donations', DonationController::class)->middleware(EnsureUserIsDonor::class);

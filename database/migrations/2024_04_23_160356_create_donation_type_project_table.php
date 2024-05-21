@@ -18,7 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('donation_type_id');
 
             $table->foreign('project_id')->references('id')->on('projects');
-            $table->foreign('donation_type_id')->references('id')->on('donation_types');
+            $table->foreign('donation_type_id')->references('id')->on('donation_types')->onDelete('cascade');
 
             $table->timestamps();
         });

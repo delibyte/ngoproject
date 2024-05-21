@@ -32,7 +32,7 @@ class AreaController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'name' => 'required', 'max:100',
+            'name' => ['required', 'max:100'],
             'description' => 'required',
         ]);
 
@@ -57,7 +57,7 @@ class AreaController extends Controller
     public function update(Request $request, Area $area)
     {
         $attributes = $request->validate([
-            'name' => 'required', 'max:100',
+            'name' => ['required', 'max:100'],
             'description' => 'required',
         ]);
 
