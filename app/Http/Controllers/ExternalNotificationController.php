@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ExternalNotification;
+use App\Models\User;
+use Closure;
 use Illuminate\Http\Request;
 
 class ExternalNotificationController
@@ -11,7 +14,10 @@ class ExternalNotificationController
      */
     public function index()
     {
-        //
+        $notifications = ExternalNotification::with('user')->paginate(10);
+        return view('notification.index', [
+            'notifications' => $notifications
+        ]);
     }
 
     /**
@@ -19,7 +25,7 @@ class ExternalNotificationController
      */
     public function create()
     {
-        //
+        return view('notification.create');
     }
 
     /**
@@ -27,38 +33,38 @@ class ExternalNotificationController
      */
     public function store(Request $request)
     {
-        //
+        $attributes = $request->validate([
+            'type' => ['string', function (string $attribute, mixed $value, Closure $fail) {
+                if ( !($value === 'email' | $value === 'sms') ) {
+                    $fail("{$value} is an invalid type of delivery method.");
+                }
+            }],
+            'receiver' => ['required', 'exists:users,id'],
+            'description' => 'required',
+        ]);
+
+        ExternalNotification::create([
+            'type' => $attributes["type"],
+            'receiver_id' => $attributes["receiver"],
+            'subject' => $attributes["description"]
+        ]);
+
+        return redirect()->route('notifications.index')->with('success', 'External Notification Sent!');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ExternalNotification $notification)
     {
-        //
+        return view('notification.show', [
+            'notification' => $notification
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function filterUsers(Request $request)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $users = User::where('name', 'LIKE', "%{$request->name}%")->get();
+        return $users;
     }
 }

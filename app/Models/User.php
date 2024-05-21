@@ -60,6 +60,11 @@ class User extends Authenticatable
        return $this->roles->contains('name', $role);
     }
 
+    public function notifications(): HasMany
+    {
+        return $this->hasMany(ExternalNotification::class);
+    }
+
     public function donations(): HasMany
     {
         return $this->hasMany(Donation::class);
