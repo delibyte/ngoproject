@@ -10,6 +10,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\ExternalNotificationController;
+use App\Http\Controllers\PublicityEventController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsDonor;
 
@@ -40,6 +41,7 @@ Route::prefix('admin')->group(function () {
         Route::resource('roles', RoleController::class);
         Route::resource('donations/types', DonationTypeController::class);
         Route::resource('notifications', ExternalNotificationController::class);
+        Route::resource('events', PublicityEventController::class);
     });
 });
 Route::resource('donations', DonationController::class)->middleware(EnsureUserIsDonor::class);

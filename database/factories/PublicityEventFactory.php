@@ -17,7 +17,9 @@ class PublicityEventFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name' => fake()->words(2, true),
+            'description' => fake()->paragraphs(2, true),
+            'held_at' => fake()->dateTimeBetween( now(), '+2 day' )
         ];
     }
 }

@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('publicity_events', function (Blueprint $table) {
             $table->id();
-            // TODO
+            $table->string('name');
+            $table->text('description');
+            $table->timestamp('held_at');
             $table->timestamps();
         });
     }
