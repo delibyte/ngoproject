@@ -35,8 +35,8 @@
             </table>
 
             {{ $donations->links() }}
-        @else
-        <p class="text-center">Seems like you haven't made a donation yet. If you want to donate, click the "Donate" button.</p>
-        @endif
+    @else
+        <p class="text-center p-4">Seems like you haven't made a donation yet. If you want to donate, click the "Donate" button.</p>
+    @endif
     </main>
 </x-layout>

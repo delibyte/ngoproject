@@ -55,4 +55,7 @@ Route::prefix('coordinator')->group(function () {
     });
 });
 
-Route::resource('donations', DonationController::class)->middleware(EnsureUserIsDonor::class);
+Route::middleware(EnsureUserIsDonor::class)->group(function () {
+    Route::get('donations/donate', [DonationController::class, 'create'])->name('donations.create');
+    Route::resource('donations', DonationController::class)->except('create');
+});
