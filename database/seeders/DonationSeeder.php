@@ -19,7 +19,7 @@ class DonationSeeder extends Seeder
         })->take(5)->get();
 
         foreach ($donors as $donor) {
-            Donation::factory()->count(5)->create([
+            Donation::factory()->count(20)->create([
                     'donor_id' => $donor->id
             ]);
         }

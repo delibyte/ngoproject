@@ -20,10 +20,10 @@
                             <span class="font-bold flex-1"> {{ $area->name }} </span>
 
                             <button class="bg-yellow-400 p-2 rounded-md mr-2">
-                                <a class="font-bold text-white" href="{{ route('areas.index') . '/' . $area->id }}/edit"> Edit </a>
+                                <a class="font-bold text-white" href="{{ route('areas.edit', $area->id) }}"> Edit </a>
                             </button>
 
-                            <form action="{{ route('areas.index') . '/' . $area->id }}" method="POST">
+                            <form action="{{ route('areas.destroy', $area->id) }}" method="POST">
                                 {{ csrf_field() }}
                                 {{ method_field('DELETE') }}
                                 <input class="font-bold text-white bg-red-400 p-2 rounded-md" type="submit" value="Delete"></input>

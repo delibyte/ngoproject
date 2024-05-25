@@ -42,6 +42,15 @@ class UserSeeder extends Seeder
         ]);
         $user_admin->roles()->attach($role_admin->id);
 
+        // Create Coordinator User
+        $user_coordinator = User::factory()->create([
+            'name' => 'Coordinator Williams',
+            'email' => 'coordinator@ngo.com',
+            'password' => Hash::make('password'),
+            'status' => 'active',
+        ]);
+        $user_coordinator->roles()->attach($role_coordinator->id);
+
         // Create Volunteer User
         $user_donor = User::factory()->create([
             'name' => 'Donor Williams',

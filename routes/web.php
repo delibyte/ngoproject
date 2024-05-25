@@ -11,7 +11,9 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\ExternalNotificationController;
 use App\Http\Controllers\PublicityEventController;
+use App\Http\Controllers\WarehouseController;
 use App\Http\Middleware\EnsureUserIsAdmin;
+use App\Http\Middleware\EnsureUserIsCoordinator;
 use App\Http\Middleware\EnsureUserIsDonor;
 
 Route::get('/', function () {
@@ -37,11 +39,20 @@ Route::get('dashboard', function() {
 Route::prefix('admin')->group(function () {
     Route::middleware(EnsureUserIsAdmin::class)->group(function () {
         Route::get('userSearch', [ExternalNotificationController::class, 'filterUsers'])->name('admin.usersearch'); // TODO Move to Admin/UserController
-        Route::resource('areas', AreaController::class);
-        Route::resource('roles', RoleController::class);
+        Route::resource('areas', AreaController::class)->except('show');
+        Route::resource('roles', RoleController::class)->only(['index', 'edit', 'update']);
         Route::resource('donations/types', DonationTypeController::class);
-        Route::resource('notifications', ExternalNotificationController::class);
+        Route::resource('notifications', ExternalNotificationController::class)->except(['update', 'destroy']);
         Route::resource('events', PublicityEventController::class);
+        Route::resource('warehouses', WarehouseController::class);
     });
 });
+
+Route::prefix('coordinator')->group(function () {
+    Route::middleware(EnsureUserIsCoordinator::class)->group(function () {
+        Route::get('warehouses', [WarehouseController::class, 'index']);
+        Route::get('warehouses/{warehouse}', [WarehouseController::class, 'show'])->name('warehouses.show.coordinator');
+    });
+});
+
 Route::resource('donations', DonationController::class)->middleware(EnsureUserIsDonor::class);
