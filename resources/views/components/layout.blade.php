@@ -24,14 +24,14 @@
 </style>
 
 <body style="font-family: Open Sans, sans-serif">
-    <section class="px-6 py-8">
+    <section class="px-6 py-6">
         <nav class="md:flex md:justify-between md:items-center">
             <div>
                 <a href="/">
                     <!--<img src="/images/logo.svg" alt="NGO Logo" width="165" height="16">-->
 
                     <svg width="200" height="30" xmlns="http://www.w3.org/2000/svg">
-                        <text x="3" y="30" font-family="Arial" font-size="20" fill="black">NGO</text>
+                        <text x="3" y="20" font-family="Arial" font-size="20" fill="black">NGO</text>
                     </svg>
                 </a>
             </div>
@@ -45,21 +45,14 @@
                             </button>
                         </x-slot>
 
-                            <x-dropdown-item
-                                href="/dashboard"
-                                :active="request()->is('dashboard')"
-                            >
-                                Dashboard
-                            </x-dropdown-item>
+                        <x-dropdown-item
+                            href="/dashboard"
+                            :active="request()->is('dashboard')"
+                        >
+                            Dashboard
+                        </x-dropdown-item>
 
-						<x-dropdown-item
-							href="/dashboard"
-							:active="request()->is('dashboard')"
-						>
-							Dashboard
-						</x-dropdown-item>
-
-						<x-dropdown-item
+                        <x-dropdown-item
                             href="#"
                             x-data="{}"
                             @click.prevent="document.querySelector('#logout-form').submit()"

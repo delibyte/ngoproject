@@ -14,6 +14,6 @@ class Warehouse extends Model
 
     public function items(): HasMany
     {
-        return $this->hasMany(Donation::class);
+        return $this->hasMany(Donation::class)->where('donations.delivered', false);
     }
 }

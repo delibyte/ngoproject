@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             DonationSeeder::class,
             WarehouseItemSeeder::class,
             IndigentSeeder::class,
-            ExternalNotificationSeeder::class
+            ExternalNotificationSeeder::class,
+            BankLogSeeder::class
         ]);
 
     }

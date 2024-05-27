@@ -23,7 +23,7 @@ class ShipmentFactory extends Factory
             'receiver_id' => User::all()->random()->id, // TODO: Change User with Indigent
             'dispatcher_id' => User::all()->random()->id, // TODO: Change User with Volunteer
             'dispatcher_location' => fake()->address(),
-            'estimated_delivery_time' => fake()->numberBetween(20,100)
+            'completion' => fake()->randomElement(['cancelled', 'ongoing', 'completed']),
         ];
     }
 }

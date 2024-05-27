@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BankLog;
 use App\Models\Donation;
 use App\Models\DonationType;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DonationController
 {
@@ -49,12 +51,24 @@ class DonationController
             }]
         ]);
 
-        Donation::create([
+        $donation = Donation::create([
             'donor_id' => Auth::user()->id,
             'type_id' => $attributes['type_id'],
             'amount' => $attributes['amount'],
             'delivery_type' => $attributes['delivery_type']
         ]);
+
+        // TODO move this Coordinator/DonationController@update, when accepted and collected, do this
+        $donation->load('type');
+        if ( $donation->type->name == "cash" )
+        {
+            BankLog::create([
+                'donation_id' => $donation->id,
+                'amount' => $donation->amount,
+                'balance' => (DB::table('bank_logs')->latest()->first()->balance ?? 0) + $donation->amount,
+                'type' => 'incoming'
+            ]);
+        }
 
         return redirect()->route('donations.index')->with('success', 'Donation Completed!');
     }
@@ -65,16 +79,6 @@ class DonationController
     public function show(Donation $donation)
     {
         return view ('donation.show', [
-            'donation' => $donation
-        ]);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Donation $donation)
-    {
-        return view ('donation.edit', [
             'donation' => $donation
         ]);
     }

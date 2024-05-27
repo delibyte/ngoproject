@@ -35,7 +35,7 @@ class ExternalNotificationController
     {
         $attributes = $request->validate([
             'type' => ['string', function (string $attribute, mixed $value, Closure $fail) {
-                if ( !($value === 'email' | $value === 'sms') ) {
+                if ( !($value === 'email' || $value === 'sms') ) {
                     $fail("{$value} is an invalid type of delivery method.");
                 }
             }],
@@ -62,9 +62,4 @@ class ExternalNotificationController
         ]);
     }
 
-    public function filterUsers(Request $request)
-    {
-        $users = User::where('name', 'LIKE', "%{$request->name}%")->get();
-        return $users;
-    }
 }

@@ -57,16 +57,6 @@ class WarehouseController
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Warehouse $warehouse)
-    {
-        return view ('warehouse.edit', [
-            'warehouse' => $warehouse
-        ]);
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Warehouse $warehouse)

@@ -13,14 +13,12 @@ return new class extends Migration
     {
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedbiginteger('donation_id');
-            $table->foreign('donation_id')->references('id')->on('donations');
             $table->unsignedbiginteger('receiver_id');
             $table->foreign('receiver_id')->references('id')->on('users');
             $table->unsignedbiginteger('dispatcher_id');
             $table->foreign('dispatcher_id')->references('id')->on('users');
-            $table->text('dispatcher_location');
-            $table->unsignedBigInteger('estimated_delivery_time');
+            $table->text('dispatcher_location')->nullable();
+            $table->enum('completion', ['cancelled', 'ongoing', 'completed'])->default('ongoing');
             $table->timestamps();
         });
     }

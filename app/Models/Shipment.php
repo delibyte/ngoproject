@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Shipment extends Model
@@ -12,18 +14,23 @@ class Shipment extends Model
 
     protected $guarded = [];
 
-    public function item(): HasOne
+    public function item(): HasMany
     {
-        return $this->hasOne(Donation::class);
+        return $this->hasMany(Donation::class, 'shipment_id');
     }
 
-    public function receiver(): HasOne
+    public function banklog(): HasOne
     {
-        return $this->hasOne(User::class, 'receiver_id');
+        return $this->hasOne(BankLog::class, 'shipment_id');
     }
 
-    public function dispatcher(): HasOne
+    public function receiver(): BelongsTo
     {
-        return $this->hasOne(User::class, 'dispatcher_id');
+        return $this->belongsTo(User::class, 'receiver_id');
+    }
+
+    public function dispatcher(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'dispatcher_id');
     }
 }

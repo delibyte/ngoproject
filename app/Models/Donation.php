@@ -26,4 +26,9 @@ class Donation extends Model
     {
         return $this->belongsTo(DonationType::class, 'type_id');
     }
+
+    public function shipment(): BelongsTo
+    {
+        return $this->belongsTo(Shipment::class);
+    }
 }

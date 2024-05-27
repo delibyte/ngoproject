@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Administrator\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegistrationController;
@@ -11,6 +12,7 @@ use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\ExternalNotificationController;
 use App\Http\Controllers\PublicityEventController;
+use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsCoordinator;
@@ -38,13 +40,13 @@ Route::get('dashboard', function() {
 
 Route::prefix('admin')->group(function () {
     Route::middleware(EnsureUserIsAdmin::class)->group(function () {
-        Route::get('userSearch', [ExternalNotificationController::class, 'filterUsers'])->name('admin.usersearch'); // TODO Move to Admin/UserController
+        Route::get('userSearch', [UserController::class, 'searchUsers'])->name('admin.usersearch'); // TODO Move to Admin/UserController
         Route::resource('areas', AreaController::class)->except('show');
         Route::resource('roles', RoleController::class)->only(['index', 'edit', 'update']);
         Route::resource('donations/types', DonationTypeController::class);
         Route::resource('notifications', ExternalNotificationController::class)->except(['update', 'destroy']);
         Route::resource('events', PublicityEventController::class);
-        Route::resource('warehouses', WarehouseController::class);
+        Route::resource('warehouses', WarehouseController::class)->except('edit');
     });
 });
 
@@ -52,6 +54,7 @@ Route::prefix('coordinator')->group(function () {
     Route::middleware(EnsureUserIsCoordinator::class)->group(function () {
         Route::get('warehouses', [WarehouseController::class, 'index']);
         Route::get('warehouses/{warehouse}', [WarehouseController::class, 'show'])->name('warehouses.show.coordinator');
+        Route::resource('shipments', ShipmentController::class);
     });
 });
 

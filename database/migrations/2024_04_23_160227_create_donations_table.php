@@ -23,6 +23,8 @@ return new class extends Migration
             $table->boolean('collected')->default(false);
             $table->unsignedBigInteger('warehouse_id')->nullable();
             $table->foreign('warehouse_id')->references('id')->on('warehouses')->nullOnDelete();
+            $table->unsignedBigInteger('shipment_id')->nullable();
+            $table->foreign('shipment_id')->references('id')->on('shipments')->nullOnDelete();
             $table->timestamps();
         });
     }
