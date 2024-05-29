@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Area;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class WarehouseFactory extends Factory
     {
         return [
             'name' => fake()->city() . ' Warehouse',
+            'region_id' => Area::all()->random()->id,
             'location' => fake()->address()
         ];
     }

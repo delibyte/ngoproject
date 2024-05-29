@@ -27,4 +27,9 @@ class Area extends Model
     {
         return $this->hasMany(Indigent::class, 'region_id');
     }
+
+    public function warehouses(): HasMany
+    {
+        return $this->hasMany(Warehouse::class, 'region_id');
+    }
 }

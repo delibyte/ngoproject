@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedbiginteger('region_id')->nullable();
+            $table->foreign('region_id')->references('id')->on('areas')->nullOnDelete();
             $table->text('location');
             $table->timestamps();
         });

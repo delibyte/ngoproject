@@ -7,6 +7,17 @@
 
             @if ( Auth::user()->hasRole('administrator') )
                 <x-form.input name="name" :value="old('name', $warehouse->name)" required />
+
+                <x-form.label name="type"/>
+                <select name="region_id" required class="p-2 rounded-md">
+                    @foreach (\App\Models\Area::all() as $area)
+                        <option
+                            value="{{ $area->id }}"
+                            {{ $area->id == $warehouse->region_id ? 'selected' : '' }}
+                        >{{ $area->name }}</option>
+                    @endforeach
+                </select>
+
                 <x-form.input name="location" :value="old('location', $warehouse->location)" required />
 
                 <x-form.button class="shadow-xl">Update</x-form.button>

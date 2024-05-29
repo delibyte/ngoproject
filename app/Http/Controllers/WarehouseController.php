@@ -34,6 +34,7 @@ class WarehouseController
     {
         $attributes = $request->validate([
             'name' => ['required', 'max:100'],
+            'region_id' => ['required', 'exists:areas,id'],
             'location' => 'required',
         ]);
 
@@ -63,6 +64,7 @@ class WarehouseController
     {
         $attributes = $request->validate([
             'name' => ['required', 'max:100'],
+            'region_id' => ['required', 'exists:areas,id'],
             'location' => 'required',
         ]);
 
