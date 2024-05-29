@@ -17,14 +17,12 @@ class VolunteerFactory extends Factory
      */
     public function definition(): array
     {
-        $availability = '{ "week1": { "Tuesday":"17:30-18:30", "Thursday":"23:00-24:00" } }';
 
         return [
             'profession' => fake()->jobTitle(),
             'income' => fake()->randomNumber(5, true),
-            'region_id' => Area::all()->random(),
+            'region_id' => Area::all()->random()->id,
             'transportation' => fake()->boolean(),
-            'availability' => $availability,
             'status' => fake()->randomElement(['pending', 'active', 'revoked'])
         ];
     }

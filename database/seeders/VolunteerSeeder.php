@@ -6,6 +6,7 @@ use App\Models\Area;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Volunteer;
+use App\Models\Availability;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -25,6 +26,10 @@ class VolunteerSeeder extends Seeder
             $user->roles()->attach($role_volunteer->id);
 
             Volunteer::factory()->create([
+                'user_id' => $user->id
+            ]);
+
+            Availability::factory()->count(4)->create([
                 'user_id' => $user->id,
             ]);
         }

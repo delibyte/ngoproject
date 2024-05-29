@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Area;
 use App\Models\DonationType;
 use App\Models\Indigent;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -20,6 +21,7 @@ class IndigentFactory extends Factory
     {
         return [
             'user_id' => null,
+            'region_id' => Area::all()->random()->id,
             'income' => fake()->randomNumber(5, true),
             'expenditure' => fake()->randomNumber(4, true),
             'parent_id' => null,

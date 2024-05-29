@@ -11,16 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('volunteers', function (Blueprint $table) {
+        Schema::create('availabilities', function (Blueprint $table) {
             $table->id();
             $table->unsignedbiginteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->text('profession');
-            $table->unsignedbiginteger('income');
-            $table->unsignedbiginteger('region_id')->nullable();
-            $table->foreign('region_id')->references('id')->on('areas')->nullOnDelete();
-            $table->boolean('transportation');
-            $table->enum('status', ['pending', 'active', 'revoked']);
+            $table->enum('week', [1,2,3,4]);
+            $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']);
+            $table->time('start_time');
+            $table->time('end_time');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('volunteers');
+        Schema::dropIfExists('availabilities');
     }
 };

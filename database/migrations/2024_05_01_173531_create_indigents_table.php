@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedbiginteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedbiginteger('region_id')->nullable();
+            $table->foreign('region_id')->references('id')->on('areas')->nullOnDelete();
             $table->bigInteger('income');
             $table->bigInteger('expenditure');
             $table->unsignedbiginteger('parent_id')->nullable();
