@@ -24,7 +24,7 @@ class VolunteerController extends Controller
     /**
      * Show the listing for accepting new volunteer applications.
      */
-    public function create()
+    public function applications()
     {
         return view('administrator.volunteer.applications', [
             'applications' => Volunteer::where('status', 'pending')->withCount('availability')->paginate(10)

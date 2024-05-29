@@ -23,7 +23,7 @@ class IndigentController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function applications()
     {
         return view('administrator.indigent.applications', [
             'applications' => Indigent::withCount(['family', 'aidType'])->where('parent_id', null)
@@ -32,14 +32,6 @@ class IndigentController extends Controller
                                                                         ->orderBy('family_count', 'desc')
                                                                         ->paginate(10)
         ]);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
@@ -59,14 +51,19 @@ class IndigentController extends Controller
     {
         $attributes = $request->validate([
             'region_id' => ['required', 'exists:areas,id'],
-            'income' => ['required', 'integer'],
-            'expenditure' => ['required','integer'],
-            'aid_type' => ['required', 'exists:donation_types,id'],
+            'delivery_type' => ['required',function (string $attribute, mixed $value, Closure $fail) {
+                if ( !($value == "to-us" || $value == "by-us") ) {
+                    $fail("the {$attribute} can only be set to to-us or by-us");
+                }
+            }],
             'status' => ['required',function (string $attribute, mixed $value, Closure $fail) {
                 if ( !($value == "pending" || $value == "active" || $value == "revoked") ) {
                     $fail("the {$attribute} can only be set to pending, active or revoked");
                 }
             }],
+            'collected' => ['required', 'boolean'],
+            'warehouse_id' => ['nullable', 'exists:warehouses,id'],
+            'shipment_id' => ['nullable', 'exists:shipments,id']
         ]);
 
         $indigent->update($attributes);
@@ -79,6 +76,8 @@ class IndigentController extends Controller
      */
     public function destroy(Indigent $indigent)
     {
-        //
+        $indigent->delete();
+
+        return redirect()->route('indigents.index')->with('success', 'Indigent Access Revoked!');
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\Auth\SessionController;
 use App\Http\Controllers\Administrator\UserController as AdministratorUserController;
 use App\Http\Controllers\Administrator\VolunteerController as AdministratorVolunteerController;
 use App\Http\Controllers\Administrator\IndigentController as AdministratorIndigentController;
+use App\Http\Controllers\Administrator\DonationController as AdministratorDonationController;
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AreaController;
@@ -52,9 +53,9 @@ Route::prefix('admin')->group(function () {
         Route::resource('events', PublicityEventController::class);
         Route::resource('warehouses', WarehouseController::class)->except('edit');
         Route::resource('volunteers', AdministratorVolunteerController::class)->except(['show', 'create']);
-        Route::get('volunteers/applications', [AdministratorVolunteerController::class, 'create' ])->name('volunteers.create');
+        Route::get('volunteers/applications', [AdministratorVolunteerController::class, 'applications' ])->name('volunteers.applications');
         Route::resource('indigents', AdministratorIndigentController::class)->except(['show', 'create']);
-        Route::get('indigents/applications', [AdministratorIndigentController::class, 'create' ])->name('indigents.create');
+        Route::get('indigents/applications', [AdministratorIndigentController::class, 'applications' ])->name('indigents.applications');
     });
 });
 
@@ -63,6 +64,13 @@ Route::prefix('coordinator')->group(function () {
         Route::get('warehouses', [WarehouseController::class, 'index']);
         Route::get('warehouses/{warehouse}', [WarehouseController::class, 'show'])->name('warehouses.show.coordinator');
         Route::resource('shipments', ShipmentController::class)->except(['store', 'edit']);
+        Route::resource('donations', AdministratorDonationController::class)->name('index', 'coordinator.donations.index')
+                                                                            ->name('edit', 'coordinator.donations.edit')
+                                                                            ->name('store', 'coordinator.donations.store')
+                                                                            ->name('update', 'coordinator.donations.update')
+                                                                            ->name('destroy', 'coordinator.donations.destroy')
+                                                                            ->except(['show', 'create']);
+        Route::get('donations/applications', [AdministratorDonationController::class, 'applications'])->name('coordinator.donations.applications');
     });
 });
 

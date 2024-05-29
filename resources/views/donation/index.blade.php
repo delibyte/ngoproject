@@ -1,7 +1,7 @@
 <x-layout>
     <header class="max-w-xl mx-auto mt-20 text-center">
         <h1 class="text-4xl">
-            Latest <span class="text-blue-500">Donations</span>
+            Your <span class="text-blue-500">Donations</span>
         </h1>
 
         <x-button class="mt-6 shadow-xl">

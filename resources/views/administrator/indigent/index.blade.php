@@ -5,7 +5,7 @@
         </h1>
 
         <x-button class="mt-6 shadow-xl">
-            <a href="{{ route('indigents.create') }}" class="inline-block w-full"> Evaluate Applications </a>
+            <a href="{{ route('indigents.applications') }}" class="inline-block w-full"> Evaluate Applications </a>
         </x-button>
 
     </header>
