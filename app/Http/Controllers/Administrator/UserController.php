@@ -3,8 +3,14 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Area;
+use App\Models\Availability;
+use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -66,7 +72,35 @@ class UserController extends Controller
 
     public function searchUsers(Request $request)
     {
-        $users = User::where('name', 'LIKE', "%{$request->name}%")->get();
+
+        if ( $request->filterByName )
+        {
+            $users = User::where('name', 'LIKE', "{$request->name}%")->get();
+        }
+        else if ( $request->filterByRole )
+        {
+            $users = Role::with('users')->where('name', 'LIKE', "%{$request->role}%")
+                                        ->whereHas('users', function ($query) use ($request) {
+                                            $query->where('name', 'LIKE', "{$request->name}%");
+                                        })
+                                        ->get()->pluck('users');
+        }
+        else if ( $request->filterByAvailability )
+        {
+            $date = Carbon::parse( Carbon::now()->tz('Europe/Istanbul') );
+            $users = Availability::with(['volunteer' => function ($query) {
+                                        $query->where('status', 'active');
+                                    }])
+                                    ->whereHas('volunteer', function ( Builder $query ) {
+                                        $query->where('status', 'active');
+                                    })
+                                    ->where('week', $date->weekOfMonth())
+                                    ->where('day', lcfirst($date->dayName))
+                                    ->where('start_time', '<=', $date->format('H:i'))
+                                    ->where('end_time', '>=', $date->format('H:i'))
+                                    ->with('volunteer.user')
+                                    ->get()->pluck('volunteer.user');
+        }
         return $users;
     }
 }

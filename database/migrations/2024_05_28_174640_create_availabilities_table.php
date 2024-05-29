@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedbiginteger('volunteer_id');
             $table->foreign('volunteer_id')->references('id')->on('volunteers');
-            $table->enum('week', [1,2,3,4]);
+            $table->enum('week', [1,2,3,4,5]);
             $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']);
             $table->time('start_time');
             $table->time('end_time');

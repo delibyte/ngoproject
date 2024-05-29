@@ -27,7 +27,7 @@ class AvailabilityFactory extends Factory
         }
 
         return [
-            'week' => fake()->randomElement([1, 2, 3, 4]),
+            'week' => fake()->randomElement([1, 2, 3, 4, 5]),
             'day' => fake()->randomElement(['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']),
             'start_time' => $start_time,
             'end_time' => $end_time,

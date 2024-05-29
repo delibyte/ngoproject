@@ -32,7 +32,7 @@
             $.ajax({
                 url:"{{ route('admin.usersearch') }}",
                 method: "GET",
-                data: { name: name },
+                data: { filterByName: true, name: name },
                 success: function (res) {
                     var html = '';
                     $.each(res, function (index, value) {

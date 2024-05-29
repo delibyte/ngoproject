@@ -63,7 +63,7 @@ Route::prefix('coordinator')->group(function () {
     Route::middleware(EnsureUserIsCoordinator::class)->group(function () {
         Route::get('warehouses', [WarehouseController::class, 'index']);
         Route::get('warehouses/{warehouse}', [WarehouseController::class, 'show'])->name('warehouses.show.coordinator');
-        Route::resource('shipments', ShipmentController::class)->except(['store', 'edit']);
+        Route::resource('shipments', ShipmentController::class)->except(['edit']);
         Route::resource('donations', AdministratorDonationController::class)->name('index', 'coordinator.donations.index')
                                                                             ->name('edit', 'coordinator.donations.edit')
                                                                             ->name('store', 'coordinator.donations.store')

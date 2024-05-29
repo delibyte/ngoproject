@@ -24,7 +24,7 @@
             </x-form.field>
 
             <x-form.field>
-                <x-form.input name="dispatcher" id="dispatcher"/>
+                <x-form.label name="dispatcher" />
                 <select name="dispatcher_id" id="dispatcher_id" class="mt-2 p-2 rounded-md" required>
                 </select>
             </x-form.field>
@@ -40,10 +40,10 @@
             $.ajax({
                 url:"{{ route('admin.usersearch') }}",
                 method: "GET",
-                data: { name: receiver_username },
+                data: { filterByRole:true, role: "indigent", name: receiver_username },
                 success: function (res) {
                     var receivers = '';
-                    $.each(res, function (index, value) {
+                    $.each(res[0], function (index, value) {
                         receivers += '<option value="' + value.id + '">' + value.name + '</p>';
                     });
                     $('#receiver_id').html(receivers);
@@ -52,13 +52,13 @@
         });
 
 
-        $('#dispatcher').on('keyup',function(){
+        $(document).ready(function(){
             let dispatcher_username = $('#dispatcher').val();
 
             $.ajax({
                 url:"{{ route('admin.usersearch') }}",
                 method: "GET",
-                data: { name: dispatcher_username },
+                data: { filterByAvailability: true },
                 success: function (res) {
                     var dispatchers = '';
                     $.each(res, function (index, value) {
