@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
+use App\Models\BankLog;
 use App\Models\Donation;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DonationController extends Controller
 {
@@ -63,6 +65,17 @@ class DonationController extends Controller
         ]);
 
         $donation->update($attributes);
+
+        $donation->load('type');
+        if ( $donation->approval == "accepted" && $donation->collected == true && $donation->type->name == "cash" )
+        {
+            BankLog::create([
+                'donation_id' => $donation->id,
+                'amount' => $donation->amount,
+                'balance' => (DB::table('bank_logs')->latest()->first()->balance ?? 0) + $donation->amount,
+                'type' => 'incoming'
+            ]);
+        }
 
         return redirect()->route('coordinator.donations.edit', $donation->id)->with('success', 'Donation Information Updated!');
     }

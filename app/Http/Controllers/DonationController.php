@@ -51,24 +51,12 @@ class DonationController
             }]
         ]);
 
-        $donation = Donation::create([
+        Donation::create([
             'donor_id' => Auth::user()->id,
             'type_id' => $attributes['type_id'],
             'amount' => $attributes['amount'],
             'delivery_type' => $attributes['delivery_type']
         ]);
-
-        // TODO move this Coordinator/DonationController@update, when accepted and collected, do this
-        $donation->load('type');
-        if ( $donation->type->name == "cash" )
-        {
-            BankLog::create([
-                'donation_id' => $donation->id,
-                'amount' => $donation->amount,
-                'balance' => (DB::table('bank_logs')->latest()->first()->balance ?? 0) + $donation->amount,
-                'type' => 'incoming'
-            ]);
-        }
 
         return redirect()->route('donations.index')->with('success', 'Donation Completed!');
     }
