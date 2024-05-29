@@ -55,7 +55,6 @@ class ShipmentController extends Controller
             }],
             'receiver_id' => ['required', 'integer', 'exists:users,id'],
             'dispatcher_id' => ['required', 'integer', 'exists:users,id'],
-            'dispatcher_location' => ['required', 'string'],
         ]);
 
         if ( $validator->fails() )
@@ -68,7 +67,6 @@ class ShipmentController extends Controller
         $shipment = Shipment::create([
             'receiver_id' => $attributes["receiver_id"],
             'dispatcher_id' => $attributes["dispatcher_id"],
-            'dispatcher_location' => $attributes["dispatcher_location"],
             'completion' => 'ongoing'
         ]);
 

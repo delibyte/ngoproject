@@ -49,10 +49,10 @@
                         <tbody>
                         @foreach ($volunteer->availability as $availability)
                             <tr class="border-t border-gray-200">
-                                <th class="p-2 font-normal text-sm"> {{ ucfirst($availability->week) }} </th>
-                                <th class="font-normal text-sm"> {{ ucfirst($availability->day) }} </th>
-                                <th class="font-normal text-sm"> {{ substr($availability->start_time,0,5) }} </th>
-                                <th class="font-normal text-sm"> {{ substr($availability->end_time,0,5) }} </th>
+                                <th class="p-2 font-normal text-sm">{{ ucfirst($availability->week) }}</th>
+                                <th class="font-normal text-sm">{{ ucfirst($availability->day) }}</th>
+                                <th class="font-normal text-sm">{{ substr($availability->start_time,0,5) }}</th>
+                                <th class="font-normal text-sm">{{ substr($availability->end_time,0,5) }}</th>
                                 <th><button type="button" class="removeRow bg-red-300 rounded-md px-2"> ⊖ </button></th>
                             </tr>
                         @endforeach
@@ -64,10 +64,10 @@
                     <div>
                         <x-form.label name="Week" />
                         <select id="week" name="week" class="p-2 rounded-md">
-                                <option value="1"> 1 </option>
-                                <option value="2"> 2 </option>
-                                <option value="3"> 3 </option>
-                                <option value="4"> 4 </option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
                         </select>
                     </div>
 

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('availabilities', function (Blueprint $table) {
             $table->id();
-            $table->unsignedbiginteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedbiginteger('volunteer_id');
+            $table->foreign('volunteer_id')->references('id')->on('volunteers');
             $table->enum('week', [1,2,3,4]);
             $table->enum('day', ['monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']);
             $table->time('start_time');

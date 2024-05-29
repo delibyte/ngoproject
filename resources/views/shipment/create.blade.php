@@ -29,10 +29,6 @@
                 </select>
             </x-form.field>
 
-            <x-form.field>
-                <x-form.input name="dispatcher location" id="dispatcher_location" :value="old('dispathcer_location')"/>
-            </x-form.field>
-
             <x-form.button>Save</x-form.button>
         </form>
     </x-setting>

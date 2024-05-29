@@ -27,7 +27,7 @@ class VolunteerController extends Controller
     public function applications()
     {
         return view('administrator.volunteer.applications', [
-            'applications' => Volunteer::where('status', 'pending')->withCount('availability')->paginate(10)
+            'applications' => Volunteer::where('status', 'pending')->withCount('availability', 'user')->paginate(10)
         ]);
     }
 
@@ -64,7 +64,7 @@ class VolunteerController extends Controller
         ]);
 
         // This could have been way better but I am out of time.
-        Availability::where(['user_id' => $volunteer->user_id])->delete();
+        Availability::where(['volunteer_id' => $volunteer->id])->delete();
         $availabilities = json_decode($attributes["availability"]);
 
         if ( count($availabilities) > 0 )
@@ -72,7 +72,7 @@ class VolunteerController extends Controller
             foreach( $availabilities as $availability )
             {
                 Availability::create([
-                    'user_id' => $volunteer->user_id,
+                    'volunteer_id' => $volunteer->id,
                     'week' => $availability->week,
                     'day' => $availability->day,
                     'start_time' => $availability->start_time,

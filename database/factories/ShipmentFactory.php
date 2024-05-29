@@ -22,7 +22,6 @@ class ShipmentFactory extends Factory
             'donation_id' => Donation::all()->random()->id,
             'receiver_id' => User::all()->random()->id, // TODO: Change User with Indigent
             'dispatcher_id' => User::all()->random()->id, // TODO: Change User with Volunteer
-            'dispatcher_location' => fake()->address(),
             'completion' => fake()->randomElement(['cancelled', 'ongoing', 'completed']),
         ];
     }

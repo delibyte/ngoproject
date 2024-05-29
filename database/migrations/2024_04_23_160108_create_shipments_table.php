@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreign('receiver_id')->references('id')->on('users');
             $table->unsignedbiginteger('dispatcher_id');
             $table->foreign('dispatcher_id')->references('id')->on('users');
-            $table->text('dispatcher_location')->nullable();
             $table->enum('completion', ['cancelled', 'ongoing', 'completed'])->default('ongoing');
             $table->timestamps();
         });

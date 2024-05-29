@@ -14,6 +14,6 @@ class Availability extends Model
 
     public function volunteer(): BelongsTo
     {
-        return $this->belongsTo(Volunteer::class);
+        return $this->belongsTo(Volunteer::class, 'volunteer_id');
     }
 }

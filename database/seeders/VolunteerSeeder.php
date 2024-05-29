@@ -25,12 +25,12 @@ class VolunteerSeeder extends Seeder
 
             $user->roles()->attach($role_volunteer->id);
 
-            Volunteer::factory()->create([
+            $volunteer = Volunteer::factory()->create([
                 'user_id' => $user->id
             ]);
 
             Availability::factory()->count(4)->create([
-                'user_id' => $user->id,
+                'volunteer_id' => $volunteer->id
             ]);
         }
     }

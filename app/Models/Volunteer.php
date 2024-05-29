@@ -25,6 +25,6 @@ class Volunteer extends Model
 
     public function availability(): HasMany
     {
-        return $this->hasMany(Availability::class, 'user_id', 'user_id')->orderBy('week')->orderBy('day');
+        return $this->hasMany(Availability::class, 'volunteer_id')->orderBy('week')->orderBy('day');
     }
 }
