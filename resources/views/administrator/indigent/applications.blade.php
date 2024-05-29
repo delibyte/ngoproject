@@ -5,7 +5,7 @@
         </x-button>
 
         <h1 class="text-4xl">
-            Latest <span class="text-blue-500">Volunteer Applications</span>
+            Latest <span class="text-blue-500">Indigent Applications</span>
         </h1>
     </header>
 
@@ -16,23 +16,23 @@
                     <thead class="bg-gray-300">
                         <tr>
                             <th class="p-2"> Name </th>
-                            <th> Profession </th>
-                            <th> Income </th>
                             <th> Region </th>
-                            <th> Transportation </th>
-                            <th> Available Days </th>
+                            <th> Income </th>
+                            <th> Expenditure </th>
+                            <th> Aid Type </th>
+                            <th> Family Members </th>
                             <th> Action </th>
                         </tr>
                     </thead>
                 @foreach ($applications as $application)
                     <tr class="border border-t-gray-400">
                         <th class="font-normal p-2"> {{ ucfirst($application->user->name) }} </th>
-                        <th class="font-normal"> {{ $application->profession }} </th>
-                        <th class="font-normal"> {{ $application->income }} </th>
                         <th class="font-normal"> {{ $application->region->name }} </th>
-                        <th class="font-normal"> {{ $application->transportation ? "Yes" : "No" }} </th>
-                        <th class="font-normal"> {{ $application->availability_count }} </th>
-                        <th> <a href="{{ route('volunteers.edit', $application->id) }}" class="text-blue-500"> View </a> </th>
+                        <th class="font-normal"> {{ $application->income }} </th>
+                        <th class="font-normal"> {{ $application->expenditure }} </th>
+                        <th class="font-normal"> {{ ucfirst($application->aidType->name) }} </th>
+                        <th class="font-normal"> {{ $application->family_count }} </th>
+                        <th> <a href="{{ route('indigents.edit', $application->id) }}" class="text-blue-500"> View </a> </th>
                     </tr>
                 @endforeach
                 </table>

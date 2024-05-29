@@ -6,6 +6,7 @@ use App\Models\Indigent;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 
 class IndigentSeeder extends Seeder
@@ -24,16 +25,21 @@ class IndigentSeeder extends Seeder
             $user->roles()->attach($role_indigent->id);
 
             Indigent::factory()->create([
-                'user_id' => $user->id,
-                'is_child' => false
+                    'user_id' => $user->id,
+                    'is_child' => false
             ]);
         }
 
         for ( $i = 0; $i < 20; $i++ )
         {
+            $parent = Indigent::where('is_child', false)->get()->random();
             Indigent::factory()->create([
-                'is_child' => true,
-                'parent_id' => Indigent::where('is_child', false)->get()->random()->id,
+                'is_child' => fake()->boolean(),
+                'parent_id' => $parent->id,
+                'income' => 0,
+                'expenditure' => 0,
+                'aid_type' => $parent->aid_type,
+                'status' => 'revoked'
             ]);
         }
     }

@@ -10,29 +10,30 @@
 
     </header>
 
-    <main class="max-w-6xl mx-auto mt-3 lg:mt-10 space-y-6 w-8/12 mx-auto border rounded-md shadow-xl">
+    <main class="max-w-6xl mx-auto mt-3 lg:mt-10 space-y-6 w-8/12 mx-auto">
         @if ($donations->count())
-
-            <table class="table-auto w-full">
-                <thead class="bg-gray-300">
-                    <tr>
-                        <th class="p-2"> Donation Type </th>
-                        <th> Amount </th>
-                        <th> Date </th>
-                        <th> Approval </th>
-                        <th> Action </th>
+            <div class="border rounded-md shadow-xl">
+                <table class="table-auto w-full">
+                    <thead class="bg-gray-300">
+                        <tr>
+                            <th class="p-2"> Donation Type </th>
+                            <th> Amount </th>
+                            <th> Date </th>
+                            <th> Approval </th>
+                            <th> Action </th>
+                        </tr>
+                    </thead>
+                @foreach ($donations as $donation)
+                    <tr class="border border-t-gray-400">
+                        <th class="p-2"> {{ ucfirst($donation->type->name) }} </th>
+                        <th> {{ $donation->amount }} </th>
+                        <th> {{ $donation->created_at }} </th>
+                        <th> {{ ucfirst($donation->approval) }} </th>
+                        <th> <a href="{{ route('donations.show', $donation->id) }}" class="text-blue-500"> View </a> </th>
                     </tr>
-                </thead>
-            @foreach ($donations as $donation)
-                <tr class="border border-t-gray-400">
-                    <th class="p-2"> {{ ucfirst($donation->type->name) }} </th>
-                    <th> {{ $donation->amount }} </th>
-                    <th> {{ $donation->created_at }} </th>
-                    <th> {{ ucfirst($donation->approval) }} </th>
-                    <th> <a href="{{ route('donations.show', $donation->id) }}" class="text-blue-500"> View </a> </th>
-                </tr>
-            @endforeach
-            </table>
+                @endforeach
+                </table>
+            </div>
 
             {{ $donations->links() }}
     @else

@@ -43,7 +43,7 @@
                                 <th class="text-sm"> Day </th>
                                 <th class="text-sm"> Start Time </th>
                                 <th class="text-sm"> End Time </th>
-                                <th></th> <!-- Action -->
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>

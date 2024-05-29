@@ -27,7 +27,8 @@ class IndigentFactory extends Factory
             'parent_id' => null,
             'is_child' => fake()->boolean(),
             'educational_status' => fake()->randomElement(['illiterate', 'literate', 'primary', 'secondary', 'highschool', 'university', 'postgraduate', 'doctorate']),
-            'aid_type' => DonationType::all()->random()->id
-        ];
+            'aid_type' => DonationType::all()->random()->id,
+            'status' => fake()->randomElement(['pending', 'active', 'revoked'])
+       ];
     }
 }

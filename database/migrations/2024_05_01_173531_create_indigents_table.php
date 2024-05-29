@@ -25,6 +25,7 @@ return new class extends Migration
             $table->enum('educational_status', ['illiterate', 'literate', 'primary', 'secondary', 'highschool', 'university', 'postgraduate', 'doctorate']);
             $table->unsignedbiginteger('aid_type')->nullable(); // If an admin decides to delete an donation type
             $table->foreign('aid_type')->references('id')->on('donation_types')->nullOnDelete();
+            $table->enum('status', ['pending', 'active', 'revoked']);
             $table->timestamps();
         });
     }

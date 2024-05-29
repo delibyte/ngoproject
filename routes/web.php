@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\SessionController;
 
 use App\Http\Controllers\Administrator\UserController as AdministratorUserController;
 use App\Http\Controllers\Administrator\VolunteerController as AdministratorVolunteerController;
+use App\Http\Controllers\Administrator\IndigentController as AdministratorIndigentController;
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AreaController;
@@ -50,7 +51,10 @@ Route::prefix('admin')->group(function () {
         Route::resource('notifications', ExternalNotificationController::class)->except(['update', 'destroy']);
         Route::resource('events', PublicityEventController::class);
         Route::resource('warehouses', WarehouseController::class)->except('edit');
-        Route::resource('volunteers', AdministratorVolunteerController::class)->except('show');
+        Route::resource('volunteers', AdministratorVolunteerController::class)->except(['show', 'create']);
+        Route::get('volunteers/applications', [AdministratorVolunteerController::class, 'create' ])->name('volunteers.create');
+        Route::resource('indigents', AdministratorIndigentController::class)->except(['show', 'create']);
+        Route::get('indigents/applications', [AdministratorIndigentController::class, 'create' ])->name('indigents.create');
     });
 });
 
