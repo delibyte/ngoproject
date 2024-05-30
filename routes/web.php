@@ -14,6 +14,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\BankLogController;
 use App\Http\Controllers\Dashboard\AdminController as AdminDashboardController;
 use App\Http\Controllers\Dashboard\GatewayController;
+use App\Http\Controllers\Dashboard\VolunteerController as VolunteerDashboardController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\ExternalNotificationController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\WarehouseController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsCoordinator;
 use App\Http\Middleware\EnsureUserIsDonor;
+use App\Http\Middleware\EnsureUserIsVolunteer;
 
 Route::get('/', function () {
     return view('homepage');
@@ -73,3 +75,13 @@ Route::middleware(EnsureUserIsDonor::class)->group(function () {
     Route::get('donations/donate', [DonationController::class, 'create'])->name('donations.create');
     Route::resource('donations', DonationController::class)->except('create');
 });
+
+Route::prefix('volunteer')->group(function () {
+    Route::middleware(EnsureUserIsVolunteer::class)->group(function () {
+        Route::resource('shipments', VolunteerDashboardController::class)
+                                                                        ->name('index', 'volunteer.dashboard.index')
+                                                                        ->name('show', 'volunteer.dashboard.shipment.show')
+                                                                        ->name('update', 'volunteer.dashboard.shipment.update')
+                                                                        ->only(['index', 'show', 'update']);
+    });});
+

@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Area;
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Volunteer;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -68,5 +70,13 @@ class UserSeeder extends Seeder
             'status' => 'active',
         ]);
         $user_volunteer->roles()->attach($role_volunteer->id);
+        Volunteer::create([
+            'user_id' => $user_volunteer->id,
+            'profession' => 'Tester',
+            'region_id' => Area::all()->random()->id,
+            'income' => 1000,
+            'transportation' => true,
+            'status' => 'active'
+        ]);
     }
 }

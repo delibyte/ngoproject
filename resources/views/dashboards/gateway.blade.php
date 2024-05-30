@@ -4,7 +4,7 @@
             <div class="w-6/12 flex flex-col gap-y-6 py-6 justify-center border border-gray-300 rounded-md">
 
                 @if ( Auth::user()->hasRole('volunteer') )
-                <a href="/volunteer/dashboard" class="w-10/12 mx-auto">
+                <a href="/volunteer/shipments" class="w-10/12 mx-auto">
                     <button class="w-full p-2 bg-yellow-500 font-bold text-white rounded-md">
                         Go To Volunteer Dashboard
                     </button>
