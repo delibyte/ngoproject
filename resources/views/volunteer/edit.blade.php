@@ -1,6 +1,6 @@
 <x-layout>
     <x-setting :heading="'Edit Volunteer Information: ' . $volunteer->user->name" class="w-10/12 mx-auto">
-        <form id="volunteerForm" method="POST" action="{{ route('volunteers.update', $volunteer->id) }}" enctype="multipart/form-data">
+        <form id="volunteerForm" method="POST" action="{{ route('volunteer.application.update', $volunteer->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 
@@ -18,7 +18,7 @@
                         >{{ ucwords($area->name) }}</option>
                     @endforeach
                 </select>
-                <x-form.error name="region_id"/>
+                <x-form.error name="type_id"/>
             </x-form.field>
 
             <x-form.field>
@@ -94,16 +94,6 @@
                     <button id="addRow" type="button" class="rounded-md border border-gray-200 p-2 mt-6 bg-blue-400 font-bold text-white"> Add </button>
                 </div>
                 <x-form.error name="availability"/>
-            </x-form.field>
-
-            <x-form.field>
-                <x-form.label name="Status" />
-                <select name="status" class="p-2 rounded-md" {{ Auth::user()->hasRole('administrator') ? "required" : "disabled" }}>
-                    <option value="pending" {{ $volunteer->status == "pending" ? "selected" : "" }} > Pending </option>
-                    <option value="active" {{ $volunteer->status == "active" ? "selected" : "" }} > Active </option>
-                    <option value="revoked" {{ $volunteer->status == "revoked" ? "selected" : "" }} > Revoked </option>
-                </select>
-                <x-form.error name="status"/>
             </x-form.field>
 
             <x-button id="updateButton" class="mt-6">Update</x-button>

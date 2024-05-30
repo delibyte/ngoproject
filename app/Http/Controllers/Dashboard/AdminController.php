@@ -3,12 +3,32 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\Area;
+use App\Models\Donation;
+use App\Models\Donor;
+use App\Models\Indigent;
+use App\Models\PublicityEvent;
+use App\Models\Shipment;
+use App\Models\User;
+use App\Models\Volunteer;
+use App\Models\Warehouse;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        return view('dashboards.admin');
+        return view('dashboards.admin', [
+            'users' => User::all()->count(),
+            'volunteers' => Volunteer::where('status', 'active')->count(),
+            'indigents' => Indigent::where('status', 'active')->count(),
+            'donors' => Donor::where('status', 'active')->count(),
+            'balance' => DB::table('bank_logs')->latest('id')->first()->balance,
+            'areas' => Area::all()->count(),
+            'warehouses' => Warehouse::all()->count(),
+            'donations' => Donation::all()->count(),
+            'events' => PublicityEvent::all()->count(),
+            'shipments' => Shipment::where('completion', 'ongoing')->count()
+        ]);
     }
 }

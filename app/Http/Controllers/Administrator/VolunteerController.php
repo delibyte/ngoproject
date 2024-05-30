@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Models\Availability;
+use App\Models\Role;
+use App\Models\User;
 use App\Models\Volunteer;
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class VolunteerController extends Controller
 {
@@ -88,6 +91,12 @@ class VolunteerController extends Controller
             'transportation' => ( $attributes["transportation"] == "yes" ? true : false ),
             'status' => $attributes["status"]
         ]);
+
+        if ( $attributes["status"] == "active" )
+        {
+            $user = User::where('id', $volunteer->user_id)->first();
+            $user->roles()->attach(Role::where('name', 'volunteer')->first()->id);
+        }
 
         return redirect()->route('volunteers.edit', $volunteer->id)->with('success', 'Volunteer Information Updated!');
     }

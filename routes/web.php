@@ -19,9 +19,12 @@ use App\Http\Controllers\Dashboard\VolunteerController as VolunteerDashboardCont
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\ExternalNotificationController;
+use App\Http\Controllers\IndigentController;
+use App\Http\Controllers\DonorController;
 use App\Http\Controllers\PublicityEventController;
 use App\Http\Controllers\ShipmentController;
 use App\Http\Controllers\UserController as ProfileController;
+use App\Http\Controllers\VolunteerController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsCoordinator;
@@ -98,4 +101,24 @@ Route::prefix('volunteer')->group(function () {
                                                                         ->name('update', 'volunteer.dashboard.shipment.update')
                                                                         ->only(['index', 'show', 'update']);
     });
+});
+
+Route::prefix('apply')->group(function () {
+    Route::get('volunteership', [VolunteerController::class, 'create'])->name('volunteer.application.create');
+    Route::post('volunteership', [VolunteerController::class, 'store'])->name('volunteer.application.store');
+    Route::get('volunteership/application', [VolunteerController::class, 'show'])->name('volunteer.application.show');
+    Route::get('volunteership/application/edit', [VolunteerController::class, 'edit'])->name('volunteer.application.edit');
+    Route::patch('volunteership', [VolunteerController::class, 'update'])->name('volunteer.application.update');
+
+    Route::get('indigentship', [IndigentController::class, 'create'])->name('indigent.application.create');
+    Route::post('indigentship', [IndigentController::class, 'store'])->name('indigent.application.store');
+    Route::get('indigentship/application', [IndigentController::class, 'show'])->name('indigent.application.show');
+    Route::get('indigentship/application/edit', [VolunteerController::class, 'edit'])->name('indigent.application.edit');
+    Route::patch('indigentship', [IndigentController::class, 'update'])->name('indigent.application.update');
+
+    Route::get('donorship', [DonorController::class, 'create'])->name('donor.application.create');
+    Route::post('donorship', [DonorController::class, 'store'])->name('donor.application.store');
+    Route::get('donorship/application', [DonorController::class, 'show'])->name('donor.application.show');
+    Route::get('donorship/application/edit', [DonorController::class, 'edit'])->name('donor.application.edit');
+    Route::patch('donorship', [DonorController::class, 'update'])->name('donor.application.update');
 });

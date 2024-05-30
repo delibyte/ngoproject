@@ -15,7 +15,7 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Users</span>
-                        <span class="font-bold text-sm">5958 Registered Users</span>
+                        <span class="font-bold text-sm">{{ $users }} Registered Users</span>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Volunteers</span>
-                        <span class="font-bold text-sm">5958 Volunteers</span>
+                        <span class="font-bold text-sm">{{ $volunteers }} Volunteers</span>
                     </div>
                 </div>
 
@@ -49,7 +49,7 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Indigents</span>
-                        <span class="font-bold text-sm">2324 Indigent People</span>
+                        <span class="font-bold text-sm">{{ $indigents }} Indigent People</span>
                     </div>
                 </div>
 
@@ -66,7 +66,7 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Donors</span>
-                        <span class="font-bold text-sm">5958 Kind Donors</span>
+                        <span class="font-bold text-sm">{{ $donors }} Kind Donors</span>
                     </div>
                 </div>
 
@@ -84,7 +84,7 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Bank Balance</span>
-                        <span class="font-bold text-sm">2324₺ Turkish Liras</span>
+                        <span class="font-bold text-sm">{{ $balance }}₺ Turkish Liras</span>
                     </div>
                 </div>
 
@@ -101,12 +101,12 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Areas</span>
-                        <span class="font-bold text-sm">4 Defined Areas</span>
+                        <span class="font-bold text-sm">{{ $areas }} Defined Areas</span>
                     </div>
                 </div>
 
                 <div class="w-full bg-gray-100 rounded-full h-2.5">
-                    <div class="bg-amber-500 h-2.5 rounded-full" style="width: 100%"></div>
+                    <div class="bg-amber-700 h-2.5 rounded-full" style="width: 100%"></div>
                 </div>
             </div>
         </a>
@@ -118,7 +118,7 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Warehouses</span>
-                        <span class="font-bold text-sm">4 Warehouses</span>
+                        <span class="font-bold text-sm">{{ $warehouses }} Warehouses</span>
                     </div>
                 </div>
 
@@ -135,7 +135,7 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Donations</span>
-                        <span class="font-bold text-sm">2312 Donated Goods</span>
+                        <span class="font-bold text-sm">{{ $donations }} Donated Goods</span>
                     </div>
                 </div>
 
@@ -152,7 +152,7 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Publicity Events</span>
-                        <span class="font-bold text-sm">4 Events Planned</span>
+                        <span class="font-bold text-sm">{{ $events }} Events Planned</span>
                     </div>
                 </div>
 
@@ -169,12 +169,12 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Ongoing Shipments</span>
-                        <span class="font-bold text-sm">32 Good Delivering</span>
+                        <span class="font-bold text-sm">{{ $shipments }} Items Shipping</span>
                     </div>
                 </div>
 
                 <div class="w-full bg-gray-100 rounded-full h-2.5">
-                    <div class="bg-indigo-500 h-2.5 rounded-full" style="width: 100%"></div>
+                    <div class="bg-emerald-500 h-2.5 rounded-full" style="width: 100%"></div>
                 </div>
             </div>
         </a>

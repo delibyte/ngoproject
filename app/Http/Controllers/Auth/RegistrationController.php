@@ -25,6 +25,6 @@ class RegistrationController extends Controller
 
         User::create($attr);
 
-        return redirect('homepage');
+        return redirect('gateway');
     }
 }
