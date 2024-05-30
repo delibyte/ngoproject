@@ -19,7 +19,7 @@ class SessionController extends Controller
         ]);
 
         if ( auth()->attempt($attr) ) {
-            return redirect('/dashboard')->with('success', 'Logged In!');
+            return redirect('gateway')->with('success', 'Logged In!');
         }
 
         // auth failed. you can also throw validationexception

@@ -8,8 +8,9 @@
                     @csrf
 
                     <x-form.input name="name" required />
-                    <x-form.input name="username" required />
                     <x-form.input name="email" type="email" required />
+                    <x-form.input name="phone" type="tel" required />
+                    <x-form.input name="address" required />
                     <x-form.input name="password" type="password" autocomplete="new-password" required />
                     <x-form.button>Sign Up</x-form.button>
                 </form>

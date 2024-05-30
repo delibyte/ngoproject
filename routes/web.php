@@ -1,10 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Auth\SessionController;
-
 
 use App\Http\Controllers\Administrator\UserController as AdministratorUserController;
 use App\Http\Controllers\Administrator\VolunteerController as AdministratorVolunteerController;
@@ -13,6 +11,9 @@ use App\Http\Controllers\Administrator\DonationController as AdministratorDonati
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\BankLogController;
+use App\Http\Controllers\Dashboard\AdminController as AdminDashboardController;
+use App\Http\Controllers\Dashboard\GatewayController;
 use App\Http\Controllers\DonationController;
 use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\ExternalNotificationController;
@@ -33,19 +34,11 @@ Route::get('login', [SessionController::class, 'create'])->middleware('guest')->
 Route::post('login', [SessionController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth')->name('logout');
 
-Route::get('dashboard', function() {
-    if ( Auth::user()->hasRole('administrator') )
-    {
-        return view('dashboards.admin');
-    } else
-    {
-        return view('dashboards.generic');
-    }
-})->middleware('auth');
+Route::get('dashboard', [AdminDashboardController::class, 'index'])->middleware(EnsureUserIsAdmin::class);
+Route::get('gateway', [GatewayController::class, 'index'])->middleware('auth')->name('gateway');
 
 Route::prefix('admin')->group(function () {
     Route::middleware(EnsureUserIsAdmin::class)->group(function () {
-        Route::get('userSearch', [AdministratorUserController::class, 'searchUsers'])->name('admin.usersearch');
         Route::resource('areas', AreaController::class)->except('show');
         Route::resource('roles', RoleController::class)->only(['index', 'edit', 'update']);
         Route::resource('donations/types', DonationTypeController::class);
@@ -61,6 +54,7 @@ Route::prefix('admin')->group(function () {
 
 Route::prefix('coordinator')->group(function () {
     Route::middleware(EnsureUserIsCoordinator::class)->group(function () {
+        Route::get('userSearch', [AdministratorUserController::class, 'searchUsers'])->name('admin.usersearch');
         Route::get('warehouses', [WarehouseController::class, 'index']);
         Route::get('warehouses/{warehouse}', [WarehouseController::class, 'show'])->name('warehouses.show.coordinator');
         Route::resource('shipments', ShipmentController::class)->except(['edit']);
@@ -71,6 +65,7 @@ Route::prefix('coordinator')->group(function () {
                                                                             ->name('destroy', 'coordinator.donations.destroy')
                                                                             ->except(['show', 'create']);
         Route::get('donations/applications', [AdministratorDonationController::class, 'applications'])->name('coordinator.donations.applications');
+        Route::resource('banklogs', BankLogController::class)->only(['index', 'show']);
     });
 });
 

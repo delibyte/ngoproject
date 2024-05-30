@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\BankLogs;
+use App\Models\BankLog;
 use Illuminate\Http\Request;
 
 class BankLogController extends Controller
@@ -12,54 +12,20 @@ class BankLogController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+        return view ('banklog.index', [
+            'logs' => BankLog::orderBy('created_at', 'desc')
+                                ->orderBy('id', 'desc')
+                                ->paginate(10)
+        ]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(BankLogs $bankLogs)
+    public function show(BankLog $banklog)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(BankLogs $bankLogs)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, BankLogs $bankLogs)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(BankLogs $bankLogs)
-    {
-        //
+        return view ('banklog.show', [
+            'log' => $banklog
+        ]);
     }
 }
