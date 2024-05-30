@@ -51,6 +51,7 @@ Route::prefix('admin')->group(function () {
         Route::get('volunteers/applications', [AdministratorVolunteerController::class, 'applications' ])->name('volunteers.applications');
         Route::resource('indigents', AdministratorIndigentController::class)->except(['show', 'create']);
         Route::get('indigents/applications', [AdministratorIndigentController::class, 'applications' ])->name('indigents.applications');
+        Route::resource('users', AdministratorUserController::class)->only(['index', 'edit', 'update', 'destroy']);
     });
 });
 

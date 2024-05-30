@@ -15,7 +15,9 @@ class Warehouse extends Model
 
     public function items(): HasMany
     {
-        return $this->hasMany(Donation::class)->where('donations.shipment_id', null);
+        return $this->hasMany(Donation::class)
+            ->where('collected', true)
+            ->where('donations.shipment_id', null);
     }
 
     public function region(): BelongsTo

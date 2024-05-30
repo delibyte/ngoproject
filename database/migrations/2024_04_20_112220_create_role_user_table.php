@@ -15,7 +15,7 @@ return new class extends Migration
             $table->unsignedbiginteger('user_id');
             $table->unsignedbiginteger('role_id');
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('role_id')->references('id')->on('roles');
 
             $table->timestamps();

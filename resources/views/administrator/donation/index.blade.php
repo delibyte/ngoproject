@@ -10,23 +10,28 @@
 
     </header>
 
-    <main class="max-w-6xl mx-auto mt-3 lg:mt-10 space-y-6">
+    <main class="max-w-6xl w-7/12 mx-auto mt-3 lg:mt-10 space-y-6">
         @if ($donations->count())
-            @foreach ($donations as $donation)
-            <x-panel class="shadow-md">
-                <ul>
-                    <li>
-                        <div class="flex place-content-between items-center">
-                            <span class="font-bold flex-1"> {{ $donation->donor->name }} </span>
-
-                            <button class="bg-yellow-400 p-2 rounded-md mr-2">
-                                <a class="font-bold text-white" href="{{ route('coordinator.donations.edit', $donation->id) }}"> Edit </a>
-                            </button>
-                        </div>
-                    </li>
-                </ul>
-            </x-panel>
-            @endforeach
+            <div class="border border-gray-400 rounded-md shadow-xl">
+                <table class="table-auto w-full">
+                    <thead class="bg-gray-300">
+                        <tr>
+                            <th class="p-2"> Donor </th>
+                            <th> Type </th>
+                            <th> Date </th>
+                            <th> Action </th>
+                        </tr>
+                    </thead>
+                @foreach ($donations as $donation)
+                    <tr class="border border-t-gray-400">
+                        <th class="font-normal p-2"> {{ $donation->donor->name }} </th>
+                        <th class="font-normal"> {{ ucfirst($donation->type->name) }} </th>
+                        <th class="font-normal"> {{ $donation->created_at }} </th>
+                        <th> <a href="{{ route('coordinator.donations.edit', $donation->id) }}" class="text-blue-500"> Edit </a> </th>
+                    </tr>
+                @endforeach
+                </table>
+            </div>
 
             {{ $donations->links() }}
         @else
