@@ -3,7 +3,6 @@
 <title>NGO</title>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.tailwindcss.com"></script>
 
@@ -38,32 +37,19 @@
 
             <div class="mt-8 md:mt-0 mr-2 flex items-center">
                 @auth
-                    <x-dropdown>
-                        <x-slot name="trigger">
-                            <button class="text-xs font-bold uppercase">
-                                Welcome, {{ auth()->user()->name }}!
-                            </button>
-                        </x-slot>
-
-                        <x-dropdown-item
-                            href="/dashboard"
-                            :active="request()->is('dashboard')"
-                        >
-                            Dashboard
-                        </x-dropdown-item>
-
-                        <x-dropdown-item
-                            href="#"
-                            x-data="{}"
-                            @click.prevent="document.querySelector('#logout-form').submit()"
-                        >
-                            Log Out
-                        </x-dropdown-item>
-
+                <div class="dropdown relative">
+                    <button class="dropbtn text-xs font-bold uppercase">
+                        Welcome, {{ auth()->user()->name }}!
+                    </button>
+                    <div class="dropdown-content hidden absolute bg-gray-100 mt-2 rounded-xl w-full z-50 overflow-auto max-h-52">
+                        <a href="/profile" class="block py-2 px-4 hover:bg-gray-200">Profile</a>
+                        <a href="/dashboard" class="block py-2 px-4 hover:bg-gray-200">Dashboard</a>
+                        <a href="#" id="logout" class="block py-2 px-4 hover:bg-gray-200">Log Out</a>
                         <form id="logout-form" method="POST" action="/logout" class="hidden">
                             @csrf
                         </form>
-                    </x-dropdown>
+                    </div>
+                </div>
                 @else
                     <a href="/register"
                        class="text-xs font-bold uppercase {{ request()->is('register') ? 'text-blue-500' : '' }}">
@@ -125,4 +111,30 @@
     </section>
 
     <x-flash/>
+
+    <script>
+        $(document).ready(function(){
+            $(".dropdown").click(function(){
+                $(".dropdown-content").toggleClass("hidden");
+                event.stopPropagation();
+            });
+
+            $("#logout").click(function(){
+                $("#logout-form").submit();
+                event.stopPropagation();
+            });
+
+            $(document).click(function(event) {
+                if (!$(event.target).closest('.dropdown').length) {
+                    $(".dropdown-content").addClass("hidden");
+                }
+            });
+
+            // Stupid chromium pagination darkmode problem fix
+            $("[class*='dark:']").removeClass(function(index, className) {
+                return (className.match(/(^|\s)dark:\S+/g) || []).join(" ");
+            });
+        });
+    </script>
+
 </body>
