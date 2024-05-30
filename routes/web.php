@@ -20,7 +20,7 @@ use App\Http\Controllers\DonationTypeController;
 use App\Http\Controllers\ExternalNotificationController;
 use App\Http\Controllers\PublicityEventController;
 use App\Http\Controllers\ShipmentController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserController as ProfileController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Middleware\EnsureUserIsAdmin;
 use App\Http\Middleware\EnsureUserIsCoordinator;
@@ -39,12 +39,15 @@ Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth')
 
 Route::get('dashboard', [AdminDashboardController::class, 'index'])->middleware(EnsureUserIsAdmin::class);
 Route::get('gateway', [GatewayController::class, 'index'])->middleware('auth')->name('gateway');
-Route::resource('profile', UserController::class)->middleware('auth')
-                                                ->name('show', 'profile.show')
-                                                ->name('edit', 'profile.edit')
-                                                ->name('update', 'profile.update')
-                                                ->name('destroy', 'profile.destroy')
-                                                ->only(['show', 'edit', 'update', 'destroy']);
+
+Route::middleware('auth')->group(function () {
+    Route::controller(ProfileController::class)->group(function () {
+        Route::get('profile', 'show')->name('profile.show');
+        Route::get('profile/edit', 'edit')->name('profile.edit');
+        Route::patch('profile', 'update')->name('profile.update');
+        Route::delete('profile', 'destroy')->name('profile.destroy');
+    });
+});
 
 Route::prefix('admin')->group(function () {
     Route::middleware(EnsureUserIsAdmin::class)->group(function () {

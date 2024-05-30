@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('volunteers', function (Blueprint $table) {
             $table->id();
             $table->unsignedbiginteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->text('profession');
             $table->unsignedbiginteger('income');
             $table->unsignedbiginteger('region_id')->nullable();
