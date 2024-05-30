@@ -4,7 +4,7 @@
             @csrf
             @method('PATCH')
 
-            <x-form.input name="name" :value="$donation->donor->name" disabled />
+            <x-form.input name="name" :value="$donation->donor->user->name" disabled />
 
             <x-form.field>
                 <x-form.label name="type_id" />

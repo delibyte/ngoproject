@@ -8,6 +8,7 @@ use App\Http\Controllers\Administrator\UserController as AdministratorUserContro
 use App\Http\Controllers\Administrator\VolunteerController as AdministratorVolunteerController;
 use App\Http\Controllers\Administrator\IndigentController as AdministratorIndigentController;
 use App\Http\Controllers\Administrator\DonationController as AdministratorDonationController;
+use App\Http\Controllers\Administrator\DonorController as AdministratorDonorController;
 
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\AreaController;
@@ -37,7 +38,7 @@ Route::get('login', [SessionController::class, 'create'])->middleware('guest')->
 Route::post('login', [SessionController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth')->name('logout');
 
-Route::get('dashboard', [AdminDashboardController::class, 'index'])->middleware(EnsureUserIsAdmin::class);
+Route::get('dashboard', [AdminDashboardController::class, 'index'])->middleware(EnsureUserIsCoordinator::class);
 Route::get('gateway', [GatewayController::class, 'index'])->middleware('auth')->name('gateway');
 
 Route::middleware('auth')->group(function () {
@@ -59,6 +60,8 @@ Route::prefix('admin')->group(function () {
         Route::resource('warehouses', WarehouseController::class)->except('edit');
         Route::resource('volunteers', AdministratorVolunteerController::class)->except(['show', 'create']);
         Route::get('volunteers/applications', [AdministratorVolunteerController::class, 'applications' ])->name('volunteers.applications');
+        Route::resource('donors', AdministratorDonorController::class)->except(['show', 'create']);
+        Route::get('donors/applications', [AdministratorDonorController::class, 'applications' ])->name('donors.applications');
         Route::resource('indigents', AdministratorIndigentController::class)->except(['show', 'create']);
         Route::get('indigents/applications', [AdministratorIndigentController::class, 'applications' ])->name('indigents.applications');
         Route::resource('users', AdministratorUserController::class)->only(['index', 'edit', 'update', 'destroy']);

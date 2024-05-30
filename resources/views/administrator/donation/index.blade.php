@@ -24,7 +24,7 @@
                     </thead>
                 @foreach ($donations as $donation)
                     <tr class="border border-t-gray-400">
-                        <th class="font-normal p-2"> {{ $donation->donor->name }} </th>
+                        <th class="font-normal p-2"> {{ $donation->donor->user->name }} </th>
                         <th class="font-normal"> {{ ucfirst($donation->type->name) }} </th>
                         <th class="font-normal"> {{ $donation->created_at }} </th>
                         <th> <a href="{{ route('coordinator.donations.edit', $donation->id) }}" class="text-blue-500"> Edit </a> </th>

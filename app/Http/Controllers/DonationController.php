@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Donation;
 use App\Models\DonationType;
+use App\Models\Donor;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,8 +16,8 @@ class DonationController
      */
     public function index()
     {
-        $user = Auth::user();
-        $donations = Donation::where('donor_id', $user->id)->orderBy('created_at', 'desc')->with('type')->paginate(20);
+        $donor = Donor::where('user_id', Auth::user()->id)->first();
+        $donations = Donation::where('donor_id', $donor->id)->orderBy('created_at', 'desc')->with('type')->paginate(20);
         return view('donation.index', [
             'donations' => $donations
         ]);
@@ -50,7 +51,7 @@ class DonationController
         ]);
 
         Donation::create([
-            'donor_id' => Auth::user()->id,
+            'donor_id' => Donor::where('user_id', Auth::user()->id)->first()->id,
             'type_id' => $attributes['type_id'],
             'amount' => $attributes['amount'],
             'delivery_type' => $attributes['delivery_type']

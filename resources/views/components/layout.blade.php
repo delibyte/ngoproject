@@ -43,7 +43,7 @@
                     </button>
                     <div class="dropdown-content hidden absolute bg-gray-100 mt-2 rounded-xl w-full z-50 overflow-auto max-h-52">
                         <a href="/profile" class="block py-2 px-4 hover:bg-gray-200">Profile</a>
-                        <a href="/dashboard" class="block py-2 px-4 hover:bg-gray-200">Dashboard</a>
+                        <a href="/gateway" class="block py-2 px-4 hover:bg-gray-200">Dashboard</a>
                         <a href="#" id="logout" class="block py-2 px-4 hover:bg-gray-200">Log Out</a>
                         <form id="logout-form" method="POST" action="/logout" class="hidden">
                             @csrf

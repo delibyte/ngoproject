@@ -10,8 +10,7 @@ class GatewayController extends Controller
 {
     public function index()
     {
-        if ( Auth::user() && ( Auth::user()->hasRole('administrator')
-                            || Auth::user()->hasRole('coordinator') ))
+        if ( Auth::user() && ( Auth::user()->hasRole('coordinator') || Auth::user()->hasRole('administrator') ) )
         {
             return redirect('/dashboard');
         }

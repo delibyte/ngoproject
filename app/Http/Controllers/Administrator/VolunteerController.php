@@ -15,7 +15,7 @@ class VolunteerController extends Controller
      */
     public function index()
     {
-        $volunteers = Volunteer::with('user')->where('status', 'active')->paginate(10);
+        $volunteers = Volunteer::with('user')->where('status', 'active')->orderBy('updated_at', 'desc')->paginate(10);
         return view('administrator.volunteer.index', [
             'volunteers' => $volunteers
         ]);

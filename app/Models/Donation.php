@@ -14,7 +14,7 @@ class Donation extends Model
 
     public function donor(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Donor::class, 'donor_id');
     }
 
     public function warehouse(): BelongsTo

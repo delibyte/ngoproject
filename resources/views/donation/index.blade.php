@@ -25,10 +25,10 @@
                     </thead>
                 @foreach ($donations as $donation)
                     <tr class="border border-t-gray-400">
-                        <th class="p-2"> {{ ucfirst($donation->type->name) }} </th>
-                        <th> {{ $donation->amount }} </th>
-                        <th> {{ $donation->created_at }} </th>
-                        <th> {{ ucfirst($donation->approval) }} </th>
+                        <th class="p-2 font-normal"> {{ ucfirst($donation->type->name) }} </th>
+                        <th class="font-normal"> {{ $donation->amount }} </th>
+                        <th class="font-normal"> {{ $donation->created_at }} </th>
+                        <th class="font-normal"> {{ ucfirst($donation->approval) }} </th>
                         <th> <a href="{{ route('donations.show', $donation->id) }}" class="text-blue-500"> View </a> </th>
                     </tr>
                 @endforeach

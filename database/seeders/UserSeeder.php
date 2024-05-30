@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Area;
+use App\Models\Donor;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Volunteer;
@@ -61,6 +62,10 @@ class UserSeeder extends Seeder
             'status' => 'active',
         ]);
         $user_donor->roles()->attach($role_donor->id);
+        Donor::create([
+            'user_id' => $user_donor->id,
+            'status' => 'active'
+        ]);
 
         // Create Volunteer User
         $user_volunteer = User::factory()->create([

@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\BankLog;
 use App\Models\Donation;
 use App\Models\DonationType;
-use App\Models\User;
+use App\Models\Donor;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
@@ -25,7 +25,7 @@ class BankLogFactory extends Factory
         $amount = fake()->numberBetween(50, 200);
 
         $donation = Donation::create([
-            'donor_id' => User::all()->random()->id,
+            'donor_id' => Donor::all()->random()->id,
             'type_id' => DonationType::where('name', 'cash')->first()->id,
             'amount' => $amount,
             'approval' => 'accepted',

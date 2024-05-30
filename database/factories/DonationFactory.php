@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\DonationType;
+use App\Models\Donor;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -19,7 +20,7 @@ class DonationFactory extends Factory
     public function definition(): array
     {
         return [
-            'donor_id' => User::all()->random()->id,
+            'donor_id' => Donor::all()->random()->id,
             'type_id' => DonationType::all()->random()->id,
             'amount' => fake()->numberBetween(3, 15),
             'approval' => fake()->randomElement(['pending', 'accepted', 'rejected']),
