@@ -7,7 +7,7 @@
             <x-form.input name="name" :value="$donation->donor->user->name" disabled />
 
             <x-form.field>
-                <x-form.label name="type_id" />
+                <x-form.label name="type" />
                 <select name="type_id" required class="p-2 rounded-md">
                     @foreach (\App\Models\DonationType::all() as $type)
                         <option
@@ -18,6 +18,8 @@
                 </select>
                 <x-form.error name="type_id"/>
             </x-form.field>
+
+            <x-form.input name="amount" :value="$donation->amount" disabled />
 
             <x-form.field>
                 <x-form.label name="Delivery Type" />

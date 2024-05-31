@@ -77,7 +77,7 @@ Route::prefix('admin')->group(function () {
         Route::get('warehouses', [WarehouseController::class, 'index'])->name('warehouses.index');
         Route::get('warehouses/{warehouse}', [WarehouseController::class, 'show'])->name('warehouses.show');
         Route::resource('shipments', ShipmentController::class)->except(['edit']);
-        Route::resource('donations', AdministratorDonationController::class);
+        Route::resource('donations', AdministratorDonationController::class)->except('show');
         Route::get('donations/applications', [AdministratorDonationController::class, 'applications'])->name('donations.applications');
         Route::resource('banklogs', BankLogController::class)->only(['index', 'show']);
         Route::get('areas', [AreaController::class, 'index'])->name('areas.index');

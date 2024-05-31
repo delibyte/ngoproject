@@ -85,7 +85,9 @@
 
 
         <a href="{{ route('banklogs.index') }}">
-            <div class="w-11/12 mx-auto rounded-xl shadow-xl border border-gray-200 bg-gray-100 p-2">
+            <div class="w-11/12 mx-auto rounded-xl shadow-xl border border-gray-200 p-2
+                {{ ( $balance < config('app.bank_minimum_balance') ? "bg-red-200" : "bg-gray-100" ) }}
+                ">
                 <div class="flex flex-row">
                     <img src="images/bank.svg" width="40" class="ml-2"/>
 

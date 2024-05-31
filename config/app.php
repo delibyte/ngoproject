@@ -17,6 +17,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Minimum Bank Balance
+    |--------------------------------------------------------------------------
+    |
+    | This value is the minimum balance of your bank account, which will be used to check
+    | if there is enough money to continue operation, if not your dashboard will tell you
+    | that it's time to plan a publicity event.
+    |
+    */
+
+    'bank_minimum_balance' => env('APP_BANK_MIN_BALANCE', 5000),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
     |
