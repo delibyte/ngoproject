@@ -43,7 +43,7 @@ Route::get('login', [SessionController::class, 'create'])->middleware('guest')->
 Route::post('login', [SessionController::class, 'store'])->middleware('guest');
 Route::post('logout', [SessionController::class, 'destroy'])->middleware('auth')->name('logout');
 
-Route::get('dashboard', [AdminDashboardController::class, 'index'])->middleware(EnsureUserIsCoordinator::class);
+Route::get('dashboard', [AdminDashboardController::class, 'index'])->middleware(EnsureUserIsCoordinator::class)->name('dashboard');
 Route::get('gateway', [GatewayController::class, 'index'])->middleware('auth')->name('gateway');
 
 Route::middleware('auth')->group(function () {

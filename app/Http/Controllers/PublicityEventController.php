@@ -75,7 +75,7 @@ class PublicityEventController
 
         $event->update($attributes);
 
-        return redirect()->route('events.index')->with('success', 'Event Updated!');
+        return redirect()->route('events.edit', $event->id)->with('success', 'Event Updated!');
     }
 
     /**

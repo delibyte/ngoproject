@@ -1,5 +1,5 @@
 <x-layout>
-    <x-setting :heading="'Edit Event: ' . $event->name">
+    <x-setting :heading="'Edit Event: ' . $event->name" link="{{ route('events.index') }}">
         <form method="POST" action="{{ route('events.update', $event->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
@@ -11,12 +11,13 @@
             <div class="flex gap-x-4">
                 <x-form.button class="shadow-xl">Update</x-form.button>
 
-                <form method="POST" action="{{ route('events.destroy', $event->id) }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('DELETE')
-                    <x-form.button class="shadow-xl">Delete</x-form.button>
-                </form>
             </div>
+        </form>
+
+        <form method="POST" action="{{ route('events.destroy', $event->id) }}" enctype="multipart/form-data">
+            @csrf
+            @method('DELETE')
+            <x-form.button class="shadow-xl">Delete</x-form.button>
         </form>
     </x-setting>
 </x-layout>

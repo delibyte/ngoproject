@@ -1,5 +1,5 @@
 <x-layout>
-    <x-setting :heading="'Edit Area: ' . $area->name">
+    <x-setting :heading="'Edit Area: ' . $area->name" link="{{ route('areas.index') }}">
         <form method="POST" action="{{ route('areas.update', $area->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')

@@ -1,5 +1,5 @@
 <x-layout>
-    <x-setting :heading="'Edit Indigent Information: ' . $indigent->user->name" class="w-10/12 mx-auto">
+    <x-setting :heading="'Edit Indigent Information: ' . $indigent->user->name" link="{{ route('indigents.index') }}" class="w-10/12 mx-auto">
         <form method="POST" action="{{ route('indigents.update', $indigent->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')

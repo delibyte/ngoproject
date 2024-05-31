@@ -1,5 +1,5 @@
 <x-layout>
-    <x-setting :heading="'Edit Volunteer Application'" class="w-10/12 mx-auto">
+    <x-setting :heading="'Edit Volunteer Application'" link="{{ route('volunteer.dashboard.index') }}" class="w-10/12 mx-auto">
         <form id="volunteerForm" method="POST" action="{{ route('volunteer.application.update') }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')

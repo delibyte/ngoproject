@@ -35,7 +35,7 @@
         <a href="{{ route('volunteers.index') }}">
             <div class="w-11/12 mx-auto rounded-xl shadow-xl border border-gray-200 bg-gray-100 p-2">
                 <div class="flex flex-row">
-                    <img src="images/hand-heart.svg" width="40" class="ml-2"/>
+                    <img src="images/volunteer.svg" width="40" class="ml-2"/>
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Volunteers</span>

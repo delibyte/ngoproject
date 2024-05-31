@@ -1,6 +1,6 @@
 <x-layout>
     <div class="w-7/12 mx-auto -mb-28">
-        <x-setting :heading="'Warehouse Information'">
+        <x-setting :heading="'Warehouse Information'" link="{{ route('warehouses.index') }}">
             <form method="POST" action="{{ route('warehouses.update', $warehouse->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')

@@ -63,7 +63,7 @@ class AreaController extends Controller
 
         $area->update($attributes);
 
-        return redirect()->route('areas.index')->with('success', 'Area Updated!');
+        return redirect()->route('areas.edit', $area->id)->with('success', 'Area Updated!');
     }
 
     /**

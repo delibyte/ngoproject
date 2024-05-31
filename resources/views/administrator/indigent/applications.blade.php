@@ -1,7 +1,7 @@
 <x-layout>
     <header class="max-w-xl mx-auto mt-20 text-center">
         <x-button class="mb-4">
-            <a href="{{ url()->previous() }}"> Go Back </a>
+            <a href="{{ route('dashboard') }}"> Go Back </a>
         </x-button>
 
         <h1 class="text-4xl">
@@ -27,7 +27,7 @@
                 @foreach ($applications as $application)
                     <tr class="border border-t-gray-400">
                         <th class="font-normal p-2"> {{ ucfirst($application->user->name) }} </th>
-                        <th class="font-normal"> {{ $application->region->name }} </th>
+                        <th class="font-normal"> {{ $application->region ? $application->region->name : "Deleted Area" }} </th>
                         <th class="font-normal"> {{ $application->income }} </th>
                         <th class="font-normal"> {{ $application->expenditure }} </th>
                         <th class="font-normal"> {{ ucfirst($application->aidType->name) }} </th>

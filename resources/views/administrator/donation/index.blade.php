@@ -5,6 +5,10 @@
         </h1>
 
         <x-button class="mt-6 shadow-xl">
+            <a href="{{ route('dashboard') }}" class="inline-block w-full"> Go Back </a>
+        </x-button>
+
+        <x-button class="mt-6 ml-2 shadow-xl">
             <a href="{{ route('donations.applications') }}" class="inline-block w-full"> Evaluate Applications </a>
         </x-button>
 

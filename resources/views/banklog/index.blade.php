@@ -3,6 +3,10 @@
         <h1 class="text-4xl">
             Latest <span class="text-blue-500">Bank Logs</span>
         </h1>
+
+        <x-button class="mt-6 shadow-xl">
+            <a href="{{ route('dashboard') }}" class="inline-block w-full"> Go Back </a>
+        </x-button>
     </header>
 
     <main class="max-w-6xl mx-auto mt-3 lg:mt-10 space-y-6 w-8/12 mx-auto">

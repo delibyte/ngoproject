@@ -4,8 +4,12 @@
             Current <span class="text-blue-500">Areas</span>
         </h1>
 
-        @if ( Auth::user()->hasRole('administrator') )
         <x-button class="mt-6 shadow-xl">
+            <a href="{{ route('dashboard') }}" class="inline-block w-full"> Go Back </a>
+        </x-button>
+
+        @if ( Auth::user()->hasRole('administrator') )
+        <x-button class="mt-6 ml-2 shadow-xl">
             <a href="{{ route('areas.create') }}" class="inline-block w-full"> Create </a>
         </x-button>
         @endif

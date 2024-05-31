@@ -24,7 +24,7 @@
                 @foreach ($applications as $application)
                     <tr class="border border-t-gray-400">
                         <th class="font-normal p-2"> {{ ucfirst($application->user->name) }} </th>
-                        <th class="font-normal"> {{ $application->region->name }} </th>
+                        <th class="font-normal"> {{ $application->region ? $application->region->name : 'Deleted Area' }} </th>
                         <th class="font-normal"> {{ $application->income }} </th>
                         <th> <a href="{{ route('donors.edit', $application->id) }}" class="text-blue-500"> View </a> </th>
                     </tr>

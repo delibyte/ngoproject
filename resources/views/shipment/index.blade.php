@@ -4,6 +4,12 @@
             Latest <span class="text-blue-500">Shipments</span>
         </h1>
 
+        @if ( Auth::user()->hasRole('administrator') )
+        <x-button class="mt-6 mr-2 shadow-xl">
+            <a href="{{ route('dashboard') }}" class="inline-block w-full"> Go Back </a>
+        </x-button>
+        @endif
+
         <x-button class="mt-6 shadow-xl">
             <a href="{{ route('shipments.create') }}" class="inline-block w-full"> New Shipment </a>
         </x-button>

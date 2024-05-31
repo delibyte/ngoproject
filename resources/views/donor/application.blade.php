@@ -3,7 +3,7 @@
 
         <x-form.input name="name" :value="$donor->user->name" disabled />
         <x-form.input name="income" type="number" :value="$donor->income" disabled />
-        <x-form.input name="region" :value="$donor->region->name" disabled />
+        <x-form.input name="region" :value="$donor->region ? $donor->region->name : 'Delete Area' " disabled />
 
         <a href="{{ route('donor.application.edit') }}">
             <x-button id="updateButton" class="mt-6">Edit</x-button>

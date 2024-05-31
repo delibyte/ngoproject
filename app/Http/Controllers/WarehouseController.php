@@ -70,7 +70,7 @@ class WarehouseController
 
         $warehouse->update($attributes);
 
-        return redirect()->route('warehouses.index')->with('success', 'Warehouse Updated!');
+        return redirect()->route('warehouses.show', $warehouse->id)->with('success', 'Warehouse Updated!');
     }
 
     /**
