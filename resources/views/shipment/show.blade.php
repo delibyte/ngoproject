@@ -1,6 +1,6 @@
 <x-layout>
     <div class="w-7/12 mx-auto -mb-28">
-        <x-setting :heading="'Shipment Information'">
+        <x-setting :heading="'Shipment Information'" link="{{ route('shipments.index') }}">
             <form method="POST" action="{{ route('shipments.update', $shipment->id) }}" enctype="multipart/form-data">
                 @csrf
                 @method('PATCH')

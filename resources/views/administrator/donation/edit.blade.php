@@ -32,7 +32,7 @@
 
             <x-form.field>
                 <x-form.label name="Approval Status" />
-                <select name="approval" class="p-2 rounded-md" {{ Auth::user()->hasRole('administrator') ? "required" : "disabled" }}>
+                <select name="approval" class="p-2 rounded-md" required }}>
                     <option value="pending" {{ $donation->approval == "pending" ? "selected" : "" }} > Pending </option>
                     <option value="accepted" {{ $donation->approval == "accepted" ? "selected" : "" }} > Accepted </option>
                     <option value="rejected" {{ $donation->approval == "rejected" ? "selected" : "" }} > Rejected </option>
@@ -42,7 +42,7 @@
 
             <x-form.field>
                 <x-form.label name="Collected" />
-                <select name="collected" class="p-2 rounded-md" {{ Auth::user()->hasRole('administrator') ? "required" : "disabled" }}>
+                <select name="collected" class="p-2 rounded-md" required }}>
                     <option value="1" {{ $donation->collected ? "selected" : "" }} > Yes </option>
                     <option value="0" {{ !($donation->collected) ? "selected" : "" }} > No </option>
                 </select>

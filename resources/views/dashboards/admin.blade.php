@@ -163,7 +163,7 @@
 
                     <div class="flex flex-col text-gray-600 ml-4 mb-3">
                         <span class="font-bold text-xl mb-1">Donation Types</span>
-                        <span class="font-bold text-sm">{{ $users }} Defined Type</span>
+                        <span class="font-bold text-sm">{{ $donation_types }} Defined Type</span>
                     </div>
                 </div>
 

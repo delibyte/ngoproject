@@ -16,7 +16,8 @@ class IndigentController extends Controller
      */
     public function index()
     {
-        $indigents = Indigent::with('user')->where('parent_id', null)->paginate(10);
+        $indigents = Indigent::with('user')->where('parent_id', null)
+                                            ->where('status', 'active')->paginate(10);
         return view('administrator.indigent.index', [
             'indigents' => $indigents
         ]);
