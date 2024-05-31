@@ -94,9 +94,12 @@ class UserController extends Controller
         }
         else if ( $request->filterByRole )
         {
-            $users = Role::with('users')->where('name', 'LIKE', "%{$request->role}%")
+            $users = Role::with(['users' => function ($query) use ($request) {
+                                            $query->where('name', 'LIKE', "%{$request->name}%");
+                                        } ])
+                                        ->where('name', 'LIKE', "%{$request->role}%")
                                         ->whereHas('users', function ($query) use ($request) {
-                                            $query->where('name', 'LIKE', "{$request->name}%");
+                                            $query->where('name', 'LIKE', "%{$request->name}%");
                                         })
                                         ->get()->pluck('users');
         }

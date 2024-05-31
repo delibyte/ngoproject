@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('shipments', function (Blueprint $table) {
             $table->id();
             $table->unsignedbiginteger('receiver_id');
-            $table->foreign('receiver_id')->references('id')->on('users');
+            $table->foreign('receiver_id')->references('id')->on('indigents');
             $table->unsignedbiginteger('dispatcher_id');
-            $table->foreign('dispatcher_id')->references('id')->on('users');
+            $table->foreign('dispatcher_id')->references('id')->on('volunteers');
             $table->enum('completion', ['cancelled', 'ongoing', 'completed'])->default('ongoing');
             $table->timestamps();
         });

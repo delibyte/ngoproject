@@ -8,8 +8,8 @@
                 <input name="shipment_id" value="{{ $shipment->id }}" hidden />
                 <x-form.input name="type" :value="ucfirst($shipment->item ? 'cash' : $shipment->item->type->name)" disabled />
                 <x-form.input name="amount" :value="$shipment->item ? $shipment->banklog->amount : $shipment->item->count()" disabled />
-                <x-form.input name="receiver" :value="$shipment->receiver->name" disabled />
-                <x-form.input name="dispatcher" :value="$shipment->dispatcher->name" disabled />
+                <x-form.input name="receiver" :value="$shipment->receiver->user->name" disabled />
+                <x-form.input name="dispatcher" :value="$shipment->dispatcher->user->name" disabled />
                 <x-form.input name="update at" :value="$shipment->updated_at" disabled />
                 <x-form.input name="created at" :value="$shipment->created_at" disabled />
 

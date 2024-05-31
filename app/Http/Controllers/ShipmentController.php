@@ -5,7 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\BankLog;
 use App\Models\Donation;
 use App\Models\DonationType;
+use App\Models\Indigent;
 use App\Models\Shipment;
+use App\Models\User;
+use App\Models\Volunteer;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +21,7 @@ class ShipmentController extends Controller
      */
     public function index()
     {
-        $shipments = Shipment::with(['item.type', 'banklog', 'receiver', 'dispatcher'])->orderBy('updated_at', 'desc')->paginate(10);
+        $shipments = Shipment::with(['item.type', 'banklog', 'receiver.user', 'dispatcher.user'])->orderBy('updated_at', 'desc')->paginate(10);
         return view('shipment.index', [
             'shipments' => $shipments
         ]);
@@ -42,7 +45,7 @@ class ShipmentController extends Controller
             'amount' => ['required', 'integer', function (string $attribute, int $value, Closure $fail) use ($request) {
                 if ( $request["type_id"] == DonationType::where('name', 'cash')->first()->id )
                 {
-                    if ( $value > db::table('bank_logs')->latest()->first()->balance )
+                    if ( $value > db::table('bank_logs')->orderBy('created_at', 'desc')->orderBy('id', 'desc')->latest()->first()->balance )
                     {
                         $fail("The {$attribute} exceeds the balance of the bank account.");
                     }
@@ -53,8 +56,8 @@ class ShipmentController extends Controller
                     }
                 }
             }],
-            'receiver_id' => ['required', 'integer', 'exists:users,id'],
-            'dispatcher_id' => ['required', 'integer', 'exists:users,id'],
+            'receiver_id' => ['required', 'integer', 'exists:indigents,user_id'],
+            'dispatcher_id' => ['required', 'integer', 'exists:volunteers,user_id'],
         ]);
 
         if ( $validator->fails() )
@@ -65,8 +68,8 @@ class ShipmentController extends Controller
         }
 
         $shipment = Shipment::create([
-            'receiver_id' => $attributes["receiver_id"],
-            'dispatcher_id' => $attributes["dispatcher_id"],
+            'receiver_id' => Indigent::where('user_id', $attributes["receiver_id"])->first()->id,
+            'dispatcher_id' => Volunteer::where('user_id', $attributes["dispatcher_id"])->first()->id,
             'completion' => 'ongoing'
         ]);
 

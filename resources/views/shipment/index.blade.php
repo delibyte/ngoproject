@@ -31,8 +31,8 @@
                         <th class="p-2 font-normal"> {{ 'Cash' }} </th>
                         <th class="p-2 font-normal"> {{ $shipment->banklog->amount }} </th>
                     @endif
-                    <th class="p-2 font-normal"> {{ $shipment->receiver->name }} </th>
-                    <th class="p-2 font-normal"> {{ $shipment->dispatcher->name }} </th>
+                    <th class="p-2 font-normal"> {{ $shipment->receiver->user->name }} </th>
+                    <th class="p-2 font-normal"> {{ $shipment->dispatcher->user->name }} </th>
                     <th class="p-2 font-normal"> {{ ucwords($shipment->completion) }} </th>
                     <th> <a href="{{ route('shipments.show', $shipment->id) }}" class="text-blue-500 font-bold"> View </a> </th>
                 </tr>

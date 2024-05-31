@@ -13,8 +13,9 @@ class VolunteerController extends Controller
 {
     public function index()
     {
+        $dispatcher_id = Volunteer::where('user_id', Auth::user()->id)->first()->id;
         return view('dashboards.volunteer.index', [
-            'shipments' => Shipment::with(['item.type'])->where('dispatcher_id', Auth::user()->id)->orderBy('updated_at', 'desc')->paginate(10)
+            'shipments' => Shipment::with(['item.type', 'receiver.user'])->where('dispatcher_id', $dispatcher_id)->orderBy('updated_at', 'desc')->paginate(10)
         ]);
     }
 
@@ -23,7 +24,7 @@ class VolunteerController extends Controller
      */
     public function show(Shipment $shipment)
     {
-        $shipment->load(['item.type', 'receiver', 'dispatcher']);
+        $shipment->load(['item.type', 'receiver.user', 'dispatcher.user']);
         return view('dashboards.volunteer.show', [
             'shipment' => $shipment
         ]);

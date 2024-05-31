@@ -24,7 +24,7 @@
                     </button>
                 </a>
                 @else
-                <a href="/apply/Indigentship" class="w-10/12 mx-auto">
+                <a href="/apply/indigentship" class="w-10/12 mx-auto">
                     <button class="w-full p-2 bg-blue-500 font-bold text-white rounded-md">
                         Apply for Indigentship
                     </button>

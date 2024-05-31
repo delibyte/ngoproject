@@ -1,7 +1,7 @@
 <x-layout>
     <header class="max-w-xl mx-auto mt-20 text-center">
         <h1 class="text-4xl">
-            Latest <span class="text-blue-500">Shipments</span>
+            Latest <span class="text-blue-500">Aids</span>
         </h1>
     </header>
 
@@ -13,10 +13,8 @@
                         <tr>
                             <th class="p-2"> Type </th>
                             <th> Amount </th>
-                            <th> Location </th>
                             <th> Date </th>
                             <th> Completion </th>
-                            <th> Action </th>
                         </tr>
                     </thead>
                 @foreach ($shipments as $shipment)
@@ -31,10 +29,8 @@
                             <th class="p-2 font-normal"> {{ 'Cash' }} </th>
                             <th class="p-2 font-normal"> {{ $shipment->banklog->amount }} </th>
                         @endif
-                        <th class="font-normal"> {{ ($shipment->receiver->user->address) }} </th>
-                        <th class="font-normal"> {{ ucfirst($shipment->completion) }} </th>
                         <th class="font-normal"> {{ $shipment->created_at }} </th>
-                        <th> <a href="{{ route('volunteer.dashboard.shipment.show', $shipment->id) }}" class="text-blue-500"> View </a> </th>
+                        <th class="font-normal"> {{ ucfirst($shipment->completion) }} </th>
                     </tr>
                 @endforeach
                 </table>

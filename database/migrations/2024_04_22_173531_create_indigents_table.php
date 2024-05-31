@@ -20,8 +20,8 @@ return new class extends Migration
             $table->bigInteger('income');
             $table->bigInteger('expenditure');
             $table->unsignedbiginteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('indigents');
-            $table->boolean('is_child');
+            $table->foreign('parent_id')->references('id')->on('indigents')->cascadeOnDelete();
+            $table->boolean('is_child')->default(false);
             $table->enum('educational_status', ['illiterate', 'literate', 'primary', 'secondary', 'highschool', 'university', 'postgraduate', 'doctorate']);
             $table->unsignedbiginteger('aid_type')->nullable(); // If an admin decides to delete an donation type
             $table->foreign('aid_type')->references('id')->on('donation_types')->nullOnDelete();

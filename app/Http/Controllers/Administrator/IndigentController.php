@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Administrator;
 
 use App\Http\Controllers\Controller;
 use App\Models\Indigent;
+use App\Models\Role;
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -51,22 +53,23 @@ class IndigentController extends Controller
     {
         $attributes = $request->validate([
             'region_id' => ['required', 'exists:areas,id'],
-            'delivery_type' => ['required',function (string $attribute, mixed $value, Closure $fail) {
-                if ( !($value == "to-us" || $value == "by-us") ) {
-                    $fail("the {$attribute} can only be set to to-us or by-us");
-                }
-            }],
+            'income' => ['required', 'integer'],
+            'expenditure' => ['required', 'integer'],
+            'aid_type' => ['required', 'exists:donation_types,id'],
             'status' => ['required',function (string $attribute, mixed $value, Closure $fail) {
                 if ( !($value == "pending" || $value == "active" || $value == "revoked") ) {
                     $fail("the {$attribute} can only be set to pending, active or revoked");
                 }
             }],
-            'collected' => ['required', 'boolean'],
-            'warehouse_id' => ['nullable', 'exists:warehouses,id'],
-            'shipment_id' => ['nullable', 'exists:shipments,id']
         ]);
 
         $indigent->update($attributes);
+
+        if ( $attributes["status"] == "active" )
+        {
+            $user = User::where('id', $indigent->user_id)->first();
+            $user->roles()->attach(Role::where('name', 'indigent')->first()->id);
+        }
 
         return redirect()->route('indigents.edit', $indigent->id)->with('success', 'Indigent Information Updated!');
     }

@@ -26,11 +26,11 @@ class Shipment extends Model
 
     public function receiver(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'receiver_id');
+        return $this->belongsTo(Indigent::class, 'receiver_id');
     }
 
     public function dispatcher(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'dispatcher_id');
+        return $this->belongsTo(Volunteer::class, 'dispatcher_id');
     }
 }

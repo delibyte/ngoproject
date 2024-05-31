@@ -3,7 +3,8 @@
 namespace Database\Factories;
 
 use App\Models\Donation;
-use App\Models\User;
+use App\Models\Indigent;
+use App\Models\Volunteer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -20,8 +21,8 @@ class ShipmentFactory extends Factory
     {
         return [
             'donation_id' => Donation::all()->random()->id,
-            'receiver_id' => User::all()->random()->id, // TODO: Change User with Indigent
-            'dispatcher_id' => User::all()->random()->id, // TODO: Change User with Volunteer
+            'receiver_id' => Indigent::all()->random()->id,
+            'dispatcher_id' => Volunteer::all()->random()->id,
             'completion' => fake()->randomElement(['cancelled', 'ongoing', 'completed']),
         ];
     }
