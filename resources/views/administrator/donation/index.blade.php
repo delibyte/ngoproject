@@ -5,7 +5,7 @@
         </h1>
 
         <x-button class="mt-6 shadow-xl">
-            <a href="{{ route('coordinator.donations.applications') }}" class="inline-block w-full"> Evaluate Applications </a>
+            <a href="{{ route('donations.applications') }}" class="inline-block w-full"> Evaluate Applications </a>
         </x-button>
 
     </header>
@@ -27,7 +27,7 @@
                         <th class="font-normal p-2"> {{ $donation->donor->user->name }} </th>
                         <th class="font-normal"> {{ ucfirst($donation->type->name) }} </th>
                         <th class="font-normal"> {{ $donation->created_at }} </th>
-                        <th> <a href="{{ route('coordinator.donations.edit', $donation->id) }}" class="text-blue-500"> Edit </a> </th>
+                        <th> <a href="{{ route('donations.edit', $donation->id) }}" class="text-blue-500"> Edit </a> </th>
                     </tr>
                 @endforeach
                 </table>

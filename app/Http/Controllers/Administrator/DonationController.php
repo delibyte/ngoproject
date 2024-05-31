@@ -77,7 +77,7 @@ class DonationController extends Controller
             ]);
         }
 
-        return redirect()->route('coordinator.donations.edit', $donation->id)->with('success', 'Donation Information Updated!');
+        return redirect()->route('donations.edit', $donation->id)->with('success', 'Donation Information Updated!');
     }
 
     /**
@@ -87,6 +87,6 @@ class DonationController extends Controller
     {
         $donation->delete();
 
-        return redirect()->route('coordinator.donations.index')->with('success', 'Donation Deleted!');
+        return redirect()->route('donations.index')->with('success', 'Donation Deleted!');
     }
 }

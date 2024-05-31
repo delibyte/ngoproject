@@ -57,7 +57,7 @@ class DonationController
             'delivery_type' => $attributes['delivery_type']
         ]);
 
-        return redirect()->route('donations.index')->with('success', 'Donation Completed!');
+        return redirect()->route('donor.donations.index')->with('success', 'Donation Completed!');
     }
 
     /**
@@ -77,6 +77,6 @@ class DonationController
     {
         $donation->delete();
 
-        return redirect()->route('donations.index')->with('success', 'Donation Deleted!');
+        return redirect()->route('donor.donations.index')->with('success', 'Donation Deleted!');
     }
 }

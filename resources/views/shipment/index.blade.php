@@ -23,7 +23,10 @@
                     </tr>
                 </thead>
                 @foreach ($shipments as $shipment)
-                <tr class="border border-t-gray-400">
+                <tr class="border border-t-gray-400 {{ $shipment->completion == "completed" ? "bg-green-300" : "" }}
+                                                        {{ $shipment->completion == "ongoing" ? "bg-yellow-300" : "" }}
+                                                        {{ $shipment->completion == "cancelled" ? "bg-red-300" : "" }}
+                    ">
                     @if ( count($shipment->item) > 0 )
                         <th class="p-2 font-normal"> {{ ucfirst( $shipment->item[0]->type->name ) }} </th>
                         <th class="p-2 font-normal"> {{ count($shipment->item) }} </th>

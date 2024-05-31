@@ -21,12 +21,9 @@
                         <div class="flex place-content-between items-center">
                             <span class="font-bold flex-1"> {{ $warehouse->name }} </span>
 
+                            @if ( Auth::user()->hasRole('administrator') )
                             <button class="bg-blue-400 p-2 rounded-md mr-2">
-                                @if ( Auth::user()->hasRole('administrator') )
                                     <a class="font-bold text-white" href="{{ route('warehouses.show', $warehouse->id) }}"> Show </a>
-                                @else
-                                    <a class="font-bold text-white" href="{{ route('warehouses.show.coordinator', $warehouse->id) }}"> Show </a>
-                                @endif
                             </button>
 
                             <form action="{{ route('warehouses.destroy', $warehouse->id) }}" method="POST">
@@ -34,6 +31,8 @@
                                 {{ method_field('DELETE') }}
                                 <input class="font-bold text-white bg-red-400 p-2 rounded-md" type="submit" value="Delete"></input>
                             </form>
+                            @endif
+
                         </div>
                     </li>
                 </ul>

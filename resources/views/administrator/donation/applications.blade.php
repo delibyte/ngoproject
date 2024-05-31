@@ -26,7 +26,7 @@
                         <th class="font-normal p-2"> {{ ucfirst($application->donor->user->name) }} </th>
                         <th class="font-normal"> {{ ucfirst($application->type->name) }} </th>
                         <th class="font-normal"> {{ $application->amount }} </th>
-                        <th> <a href="{{ route('coordinator.donations.edit', $application->id) }}" class="text-blue-500"> View </a> </th>
+                        <th> <a href="{{ route('donations.edit', $application->id) }}" class="text-blue-500"> View </a> </th>
                     </tr>
                 @endforeach
                 </table>

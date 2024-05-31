@@ -5,9 +5,12 @@
         </h1>
 
         <x-button class="mt-6 shadow-xl">
-            <a href="{{ route('donations.create') }}" class="inline-block w-full"> Donate </a>
+            <a href="{{ route('donor.donations.create') }}" class="inline-block w-full"> Donate </a>
         </x-button>
 
+        <x-button class="mt-6 ml-2 shadow-xl">
+            <a href="{{ route('donor.application.edit') }}" class="inline-block w-full"> Edit Your Application </a>
+        </x-button>
     </header>
 
     <main class="max-w-6xl mx-auto mt-3 lg:mt-10 space-y-6 w-8/12 mx-auto">
@@ -32,7 +35,7 @@
                         <th class="font-normal"> {{ $donation->amount }} </th>
                         <th class="font-normal"> {{ $donation->created_at }} </th>
                         <th class="font-normal"> {{ ucfirst($donation->approval) }} </th>
-                        <th> <a href="{{ route('donations.show', $donation->id) }}" class="text-blue-500"> View </a> </th>
+                        <th> <a href="{{ route('donor.donations.show', $donation->id) }}" class="text-blue-500"> View </a> </th>
                     </tr>
                 @endforeach
                 </table>

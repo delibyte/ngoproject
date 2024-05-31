@@ -1,6 +1,6 @@
 <x-layout>
     <x-setting :heading="'Edit Donation Information'" class="w-10/12 mx-auto">
-        <form method="POST" action="{{ route('coordinator.donations.update', $donation->id) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('donations.update', $donation->id) }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 

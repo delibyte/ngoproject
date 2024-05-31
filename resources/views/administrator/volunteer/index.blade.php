@@ -4,9 +4,11 @@
             Current <span class="text-blue-500">Volunteers</span>
         </h1>
 
+        @if ( Auth::user()->hasRole('administrator') )
         <x-button class="mt-6 shadow-xl">
             <a href="{{ route('volunteers.applications') }}" class="inline-block w-full"> Evaluate Applications </a>
         </x-button>
+        @endif
 
     </header>
 
@@ -19,9 +21,11 @@
                         <div class="flex place-content-between items-center">
                             <span class="font-bold flex-1"> {{ $volunteer->user->name }} </span>
 
+                            @if ( Auth::user()->hasRole('administrator') )
                             <button class="bg-yellow-400 p-2 rounded-md mr-2">
                                 <a class="font-bold text-white" href="{{ route('volunteers.edit', $volunteer->id) }}"> Edit </a>
                             </button>
+                            @endif
                         </div>
                     </li>
                 </ul>

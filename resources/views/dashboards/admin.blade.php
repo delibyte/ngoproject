@@ -1,13 +1,19 @@
 <x-layout>
     <section class="pb-8 -mt-4 -ml-40 max-w-4xl mx-auto">
         <header class="max-w-xl mx-auto mt-20 text-center">
+            @if ( Auth::user()->hasRole('administrator') )
             <h1 class="text-4xl">
                 Administrator <span class="text-blue-500">Dashboard</span>
+            @else
+            <h1 class="text-4xl -ml-20">
+                Coordinator <span class="text-blue-500">Dashboard</span>
+            @endif
             </h1>
         </header>
     </section>
 
     <div class="mx-8 grid grid-cols-4 gap-x-2 gap-y-8 items-start">
+        @if ( Auth::user()->hasRole('administrator') )
         <a href="{{ route('users.index') }}">
             <div class="w-11/12 mx-auto rounded-xl shadow-xl border border-gray-200 bg-gray-100 p-2">
                 <div class="flex flex-row">
@@ -24,6 +30,7 @@
                 </div>
             </div>
         </a>
+        @endif
 
         <a href="{{ route('volunteers.index') }}">
             <div class="w-11/12 mx-auto rounded-xl shadow-xl border border-gray-200 bg-gray-100 p-2">
@@ -128,7 +135,7 @@
             </div>
         </a>
 
-        <a href="{{ route('coordinator.donations.index') }}">
+        <a href="{{ route('donations.index') }}">
             <div class="w-11/12 mx-auto rounded-xl shadow-xl border border-gray-200 bg-gray-100 p-2">
                 <div class="flex flex-row">
                     <img src="images/donation.svg" width="40" class="ml-2"/>
@@ -145,7 +152,8 @@
             </div>
         </a>
 
-        <a href="{{ route('coordinator.donations.index') }}">
+        @if ( Auth::user()->hasRole('administrator') )
+        <a href="{{ route('events.index') }}">
             <div class="w-11/12 mx-auto rounded-xl shadow-xl border border-gray-200 bg-gray-100 p-2">
                 <div class="flex flex-row">
                     <img src="images/event.svg" width="40" class="ml-2"/>
@@ -161,6 +169,7 @@
                 </div>
             </div>
         </a>
+        @endif
 
         <a href="{{ route('shipments.index') }}">
             <div class="w-full mx-auto rounded-xl shadow-xl border border-gray-200 bg-gray-100 p-2">

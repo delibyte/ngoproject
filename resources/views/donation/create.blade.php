@@ -1,6 +1,6 @@
 <x-layout>
     <x-setting heading="New Donation">
-        <form method="POST" action=" {{ route('donations.store') }} " enctype="multipart/form-data">
+        <form method="POST" action=" {{ route('donor.donations.store') }} " enctype="multipart/form-data">
             @csrf
 
             <x-form.field>

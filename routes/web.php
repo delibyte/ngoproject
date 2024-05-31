@@ -57,42 +57,45 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('admin')->group(function () {
     Route::middleware(EnsureUserIsAdmin::class)->group(function () {
-        Route::resource('areas', AreaController::class)->except('show');
+        Route::resource('areas', AreaController::class)->except(['index','show']);
         Route::resource('roles', RoleController::class)->only(['index', 'edit', 'update']);
         Route::resource('donations/types', DonationTypeController::class);
         Route::resource('notifications', ExternalNotificationController::class)->except(['update', 'destroy']);
         Route::resource('events', PublicityEventController::class);
-        Route::resource('warehouses', WarehouseController::class)->except('edit');
-        Route::resource('volunteers', AdministratorVolunteerController::class)->except(['show', 'create']);
+        Route::resource('warehouses', WarehouseController::class)->except(['index', 'show', 'edit']);
+        Route::resource('volunteers', AdministratorVolunteerController::class)->only(['index', 'edit', 'update', 'destroy']);
         Route::get('volunteers/applications', [AdministratorVolunteerController::class, 'applications' ])->name('volunteers.applications');
-        Route::resource('donors', AdministratorDonorController::class)->except(['show', 'create']);
+        Route::resource('donors', AdministratorDonorController::class)->except(['index', 'show', 'create']);
         Route::get('donors/applications', [AdministratorDonorController::class, 'applications' ])->name('donors.applications');
-        Route::resource('indigents', AdministratorIndigentController::class)->except(['show', 'create']);
+        Route::resource('indigents', AdministratorIndigentController::class)->except(['index', 'show', 'create']);
         Route::get('indigents/applications', [AdministratorIndigentController::class, 'applications' ])->name('indigents.applications');
         Route::resource('users', AdministratorUserController::class)->only(['index', 'edit', 'update', 'destroy']);
     });
-});
 
-Route::prefix('coordinator')->group(function () {
     Route::middleware(EnsureUserIsCoordinator::class)->group(function () {
         Route::get('userSearch', [AdministratorUserController::class, 'searchUsers'])->name('admin.usersearch');
-        Route::get('warehouses', [WarehouseController::class, 'index']);
-        Route::get('warehouses/{warehouse}', [WarehouseController::class, 'show'])->name('warehouses.show.coordinator');
+        Route::get('warehouses', [WarehouseController::class, 'index'])->name('warehouses.index');
+        Route::get('warehouses/{warehouse}', [WarehouseController::class, 'show'])->name('warehouses.show');
         Route::resource('shipments', ShipmentController::class)->except(['edit']);
-        Route::resource('donations', AdministratorDonationController::class)->name('index', 'coordinator.donations.index')
-                                                                            ->name('edit', 'coordinator.donations.edit')
-                                                                            ->name('store', 'coordinator.donations.store')
-                                                                            ->name('update', 'coordinator.donations.update')
-                                                                            ->name('destroy', 'coordinator.donations.destroy')
-                                                                            ->except(['show', 'create']);
-        Route::get('donations/applications', [AdministratorDonationController::class, 'applications'])->name('coordinator.donations.applications');
+        Route::resource('donations', AdministratorDonationController::class);
+        Route::get('donations/applications', [AdministratorDonationController::class, 'applications'])->name('donations.applications');
         Route::resource('banklogs', BankLogController::class)->only(['index', 'show']);
+        Route::get('areas', [AreaController::class, 'index'])->name('areas.index');
+        Route::resource('volunteers', AdministratorVolunteerController::class)->only('index');
+        Route::resource('indigents', AdministratorIndigentController::class)->only('index');
+        Route::resource('donors', AdministratorDonorController::class)->only('index');
     });
 });
 
 Route::middleware(EnsureUserIsDonor::class)->group(function () {
-    Route::get('donations/donate', [DonationController::class, 'create'])->name('donations.create');
-    Route::resource('donations', DonationController::class)->except('create');
+    Route::get('donations/donate', [DonationController::class, 'create'])->name('donor.donations.create');
+    Route::resource('donations', DonationController::class)->name('index', 'donor.donations.index')
+                                                            ->name('show', 'donor.donations.show')
+                                                            ->name('store', 'donor.donations.store')
+                                                            ->name('edit', 'donor.donations.edit')
+                                                            ->name('update', 'donor.donations.update')
+                                                            ->name('destroy', 'donor.donations.destroy')
+                                                            ->except('create');
 });
 
 Route::prefix('volunteer')->group(function () {
