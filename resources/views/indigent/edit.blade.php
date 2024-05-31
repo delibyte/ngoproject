@@ -1,6 +1,6 @@
 <x-layout>
     <x-setting :heading="'Edit Indigent Application'" class="w-10/12 mx-auto">
-        <form id="indigentForm" method="POST" action="{{ route('indigent.application.update', $indigent->id) }}" enctype="multipart/form-data">
+        <form id="indigentForm" method="POST" action="{{ route('indigent.application.update') }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 

@@ -65,7 +65,7 @@ class IndigentController extends Controller
             }
         }
 
-        return redirect()->route('indigent.application.show')->with('success', 'Indigent Information Updated!');
+        return redirect()->route('indigent.application.show')->with('success', 'Indigent Account Created!');
     }
 
     /**

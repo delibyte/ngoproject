@@ -19,6 +19,8 @@
                 <x-form.error name="type_id"/>
             </x-form.field>
 
+            <x-form.input name="income" :value="$donor->income" />
+
             <x-form.field>
                 <x-form.label name="Status" />
                 <select name="status" class="p-2 rounded-md" {{ Auth::user()->hasRole('administrator') ? "required" : "disabled" }}>

@@ -19,6 +19,7 @@ class DonorFactory extends Factory
     {
         return [
             'region_id' => Area::all()->random()->id,
+            'income' => fake()->randomNumber(5, true),
             'status' => fake()->randomElement(['pending', 'active', 'revoked'])
         ];
     }

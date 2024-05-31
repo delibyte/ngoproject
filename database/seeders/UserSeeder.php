@@ -64,6 +64,8 @@ class UserSeeder extends Seeder
         $user_donor->roles()->attach($role_donor->id);
         Donor::create([
             'user_id' => $user_donor->id,
+            'region_id' => Area::all()->random()->id,
+            'income' => 23330,
             'status' => 'active'
         ]);
 

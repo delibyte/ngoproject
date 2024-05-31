@@ -30,6 +30,7 @@ class IndigentController extends Controller
         return view('administrator.indigent.applications', [
             'applications' => Indigent::withCount(['family', 'aidType'])->where('parent_id', null)
                                                                         ->where('is_child', false)
+                                                                        ->where('status', 'pending')
                                                                         ->orderBy('income', 'asc')
                                                                         ->orderBy('family_count', 'desc')
                                                                         ->paginate(10)

@@ -24,7 +24,10 @@
                         </tr>
                     </thead>
                 @foreach ($donations as $donation)
-                    <tr class="border border-t-gray-400">
+                    <tr class="border border-t-gray-400 {{ $donation->approval == "accepted" ? "bg-green-300" : "" }}
+                                                        {{ $donation->approval == "pending" ? "bg-yellow-300" : "" }}
+                                                        {{ $donation->approval == "rejected" ? "bg-red-300" : "" }}
+                    ">
                         <th class="p-2 font-normal"> {{ ucfirst($donation->type->name) }} </th>
                         <th class="font-normal"> {{ $donation->amount }} </th>
                         <th class="font-normal"> {{ $donation->created_at }} </th>

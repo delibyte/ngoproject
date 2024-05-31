@@ -49,6 +49,7 @@ class DonorController extends Controller
     {
         $attributes = $request->validate([
             'region_id' => ['required', 'exists:areas,id'],
+            'income' => ['required', 'integer'],
             'status' => ['required',function (string $attribute, mixed $value, Closure $fail) {
                 if ( !($value == "pending" || $value == "active" || $value == "revoked") ) {
                     $fail("the {$attribute} can only be set to pending, active or revoked");
@@ -59,6 +60,7 @@ class DonorController extends Controller
 
         $donor->update([
             'region_id' => $attributes["region_id"],
+            'income' => $attributes["income"],
             'status' => $attributes["status"]
         ]);
 

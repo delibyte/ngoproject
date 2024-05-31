@@ -34,7 +34,7 @@
             </div>
         </x-form.field>
 
-        <a href="{{ route('indigent.application.edit') }}"
+        <a href="{{ route('indigent.application.edit') }}">
             <x-button id="updateButton" class="mt-6">Edit</x-button>
         </a>
     </x-setting>

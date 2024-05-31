@@ -3,6 +3,10 @@
         <h1 class="text-4xl">
             Latest <span class="text-blue-500">Aids</span>
         </h1>
+
+        <x-button class="mt-6 shadow-xl">
+            <a href="{{ route('indigent.application.edit') }}" class="inline-block w-full"> Edit Your Application </a>
+        </x-button>
     </header>
 
     <main class="max-w-6xl mx-auto mt-3 lg:mt-10 space-y-6 w-10/12 mx-auto">

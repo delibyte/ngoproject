@@ -1,6 +1,6 @@
 <x-layout>
-    <x-setting :heading="'Edit Volunteer Information: ' . $volunteer->user->name" class="w-10/12 mx-auto">
-        <form id="volunteerForm" method="POST" action="{{ route('volunteer.application.update', $volunteer->id) }}" enctype="multipart/form-data">
+    <x-setting :heading="'Edit Volunteer Application'" class="w-10/12 mx-auto">
+        <form id="volunteerForm" method="POST" action="{{ route('volunteer.application.update') }}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')
 

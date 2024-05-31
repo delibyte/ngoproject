@@ -69,7 +69,7 @@ class VolunteerController extends Controller
             }
         }
 
-        return redirect()->route('volunteer.application.edit', $volunteer->id)->with('success', 'Volunteer Information Updated!');
+        return redirect()->route('volunteer.application.show')->with('success', 'Volunteer Account Created!');
     }
 
     /**
