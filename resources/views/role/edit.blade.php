@@ -1,5 +1,5 @@
 <x-layout>
-    <x-setting :heading="'Editing Users for ' . ucfirst($role->name) . ' Role'" class="shadow-xl">
+    <x-setting :heading="'Editing Users for ' . ucfirst($role->name) . ' Role'" link="{{ route('roles.index') }}" class="shadow-xl">
 
             <x-form.input name="name" :value="ucfirst(old('name', $role->name))" disabled/>
 

@@ -41,18 +41,7 @@ class DonorController extends Controller
             'status' => 'pending'
         ]);
 
-        return redirect()->route('donor.application.show')->with('success', 'Donor Information Updated!');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show()
-    {
-        $donor = Donor::where('user_id', Auth::user()->id)->first();
-        return view('donor.application', [
-            'donor' => $donor->load('user'),
-        ]);
+        return redirect()->route('donor.application.edit')->with('success', 'Donor Information Updated!');
     }
 
     /**
@@ -83,6 +72,6 @@ class DonorController extends Controller
             'income' => $attributes["income"]
         ]);
 
-        return redirect()->route('donor.application.show')->with('success', 'Donor Information Updated!');
+        return redirect()->route('donor.application.edit')->with('success', 'Donor Information Updated!');
     }
 }

@@ -63,7 +63,7 @@ class DonationTypeController extends Controller
 
         $type->update($attributes);
 
-        return redirect()->route('types.index')->with('success', 'Donation Type Updated!');
+        return redirect()->route('types.edit', $type->id)->with('success', 'Donation Type Updated!');
     }
 
     /**

@@ -1,5 +1,5 @@
 <x-layout>
-    <x-setting :heading="'Edit Donor Application'" class="w-10/12 mx-auto">
+    <x-setting :heading="'Edit Donor Application'" link="{{ route('donor.donations.index') }}" class="w-10/12 mx-auto">
         <form id="donorForm" method="POST" action="{{ route('donor.application.update')}}" enctype="multipart/form-data">
             @csrf
             @method('PATCH')

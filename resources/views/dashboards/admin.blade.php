@@ -30,6 +30,23 @@
                 </div>
             </div>
         </a>
+
+        <a href="{{ route('roles.index') }}">
+            <div class="w-11/12 mx-auto rounded-xl shadow-xl border border-gray-200 bg-gray-100 p-2">
+                <div class="flex flex-row">
+                    <img src="images/role.svg" width="40" class="ml-2"/>
+
+                    <div class="flex flex-col text-gray-600 ml-4 mb-3">
+                        <span class="font-bold text-xl mb-1">Roles</span>
+                        <span class="font-bold text-sm">{{ $roles }} Defined Roles</span>
+                    </div>
+                </div>
+
+                <div class="w-full bg-gray-100 rounded-full h-2.5">
+                    <div class="bg-sky-500 h-2.5 rounded-full" style="width: 100%"></div>
+                </div>
+            </div>
+        </a>
         @endif
 
         <a href="{{ route('volunteers.index') }}">
@@ -136,6 +153,26 @@
                 </div>
             </div>
         </a>
+
+
+        @if ( Auth::user()->hasRole('administrator') )
+        <a href="{{ route('types.index') }}">
+            <div class="w-11/12 mx-auto rounded-xl shadow-xl border border-gray-200 bg-gray-100 p-2">
+                <div class="flex flex-row">
+                    <img src="images/type.svg" width="40" class="ml-2"/>
+
+                    <div class="flex flex-col text-gray-600 ml-4 mb-3">
+                        <span class="font-bold text-xl mb-1">Donation Types</span>
+                        <span class="font-bold text-sm">{{ $users }} Defined Type</span>
+                    </div>
+                </div>
+
+                <div class="w-full bg-gray-100 rounded-full h-2.5">
+                    <div class="bg-blue-500 h-2.5 rounded-full" style="width: 100%"></div>
+                </div>
+            </div>
+        </a>
+        @endif
 
         <a href="{{ route('donations.index') }}">
             <div class="w-11/12 mx-auto rounded-xl shadow-xl border border-gray-200 bg-gray-100 p-2">

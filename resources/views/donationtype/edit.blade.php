@@ -1,5 +1,5 @@
 <x-layout>
-    <x-setting :heading="'Edit Donation Type: ' . $type->name">
+    <x-setting :heading="'Edit Donation Type: ' . $type->name" link="{{ route('types.index') }}">
         <form method="POST" action=" {{ route('types.update', ['type' => $type->id ]) }} " enctype="multipart/form-data">
             @csrf
             @method('PATCH')

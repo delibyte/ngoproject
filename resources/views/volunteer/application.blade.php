@@ -1,5 +1,5 @@
 <x-layout>
-    <x-setting :heading="'Apply For Volunteership'" class="w-10/12 mx-auto">
+    <x-setting :heading="'Apply For Volunteership'" link="{{ route('volunteer.dashboard.index') }}" class="w-10/12 mx-auto">
 
         <x-form.input name="name" :value="$volunteer->user->name" disabled />
         <x-form.input name="profession" :value="$volunteer->profession" disabled />

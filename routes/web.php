@@ -111,7 +111,7 @@ Route::prefix('volunteer')->group(function () {
 
 Route::prefix('indigent')->group(function () {
     Route::middleware(EnsureUserIsIndigent::class)->group(function () {
-        Route::get('dashboard', [IndigentDashboardController::class, 'index']);
+        Route::get('dashboard', [IndigentDashboardController::class, 'index'])->name('indigent.dashboard.index');
     });
 });
 

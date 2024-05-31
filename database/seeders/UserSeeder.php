@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Area;
+use App\Models\DonationType;
 use App\Models\Donor;
+use App\Models\Indigent;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\Volunteer;
@@ -83,6 +85,24 @@ class UserSeeder extends Seeder
             'region_id' => Area::all()->random()->id,
             'income' => 1000,
             'transportation' => true,
+            'status' => 'active'
+        ]);
+
+
+        // Create Indigent User
+        $user_indigent = User::factory()->create([
+            'name' => 'Indigent Williams',
+            'email' => 'indigent@ngo.com',
+            'password' => Hash::make('password'),
+            'status' => 'active',
+        ]);
+        $user_indigent->roles()->attach($role_indigent->id);
+        Indigent::create([
+            'user_id' => $user_indigent->id,
+            'region_id' => Area::all()->random()->id,
+            'income' => 1000,
+            'expenditure' => 800,
+            'aid_type' => DonationType::all()->random()->id,
             'status' => 'active'
         ]);
     }
